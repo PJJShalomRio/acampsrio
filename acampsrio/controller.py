@@ -71,7 +71,8 @@ class InscricaoParticipanteHandler(RequestHandler):
 
 
 application = webapp.WSGIApplication(
-                                     [('/inscricaoParticipante', InscricaoParticipanteHandler)
+                                     [('/', HomeHandler),
+                                      ('/inscricaoParticipante', InscricaoParticipanteHandler)
                                      ],
                                      debug=True)
 def main():
