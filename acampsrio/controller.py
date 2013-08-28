@@ -7,7 +7,7 @@ import datetime
 
 class HomeHandler(RequestHandler):
     def get(self):
-        self.response.out.write(template.render('pages/home.html', {}))
+        self.response.out.write(template.render('pages/index.html', {}))
         
 class AcampamentoHandler(RequestHandler):
     def get(self):
