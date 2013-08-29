@@ -36,6 +36,7 @@ class InscricaoParticipanteHandler(RequestHandler):
 
     def post(self):
         
+        
         participante = Participante()
         participante.nome = self.request.get('nome')
         participante.dataNascimento = self.request.get('dataNascimento')
