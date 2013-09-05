@@ -2,7 +2,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="span12 centered">
-				<br /> <br />
 				<h2>Contato</h2>
 				<div class="breaker">
 					<span class="left"></span>
@@ -11,23 +10,47 @@
 				</div>
 			</div>
 		</div>
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
-		<br />
+		<div class="row">
+			<div class="span6">
+				<form action="/contato" method="post">
+					<fieldset>
+						<input id="nome" name="nome" type="text" placeholder="Nome"/>
+						<input id="telCelular1" name="telCelular1" type="text" placeholder="Celular" />
+						<input id="email" name="email" type="text" placeholder="E-mail"/>
+						<textarea id="comentario" name="comentario" cols="1" rows="4" placeholder="Dúvidas/Sugestões/Reclamações"></textarea>
+						<button name="send" type="submit" class="button">Enviar</button>
+					</fieldset>
+				</form>
+			</div>
+			<div class="span6">
+				<div class="info">
+					<p class="contactAddress">
+						Rua Bento Lisboa, 280
+						<br>
+						Catete, Rio de Janeiro - RJ
+						<br>
+						<a class="fancybox-media fancybox.iframe"
+							href="https://maps.google.com/maps/ms?ie=UTF8&amp;oe=UTF8&amp;msa=0&amp;msid=218337429610107903639.00047c7b97971cc480289&amp;dg=feature&amp;t=h&amp;ll=48.857423,2.286819&amp;spn=0.002471,0.00456&amp;z=17&amp;iwloc=00047c7b9b089f45e6058&amp;output=embed">Ver
+							mapa</a>
+					</p>
+				</div>
+				<div class="info">
+					<p class="contactPhone">Telefone: (21) 2222-2222</p>
+					<p class="contactPhone">Celular 1: (21) 8888-8888</p>
+					<p class="contactPhone">Celular 2: (21) 9999-9999</p>
+					<p class="contactEmail">
+						Email:
+						<a href="#">acampsrj@gmail.com</a>
+					</p>
+				</div>
+				<div class="info">
+					<p class="contactTime">
+						Seg-Sab: 13:00 as 22:00
+						<br>
+						Dom: 15:00 as 20:00
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>

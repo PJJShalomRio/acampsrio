@@ -6,11 +6,11 @@
 	<!-- NAVIGATION  -->
 	{% include 'menu.html'%}
 	<!-- END NAVIGATION  -->
-	<h1 align="center">Inscrição de participante</h1>
+	<h1 align="center">Inscrição de serviço</h1>
 	<div class="container">
 		<div class="row">
 			<div class="span6">
-				<form action="/inscricaoParticipante" method="post">
+				<form action="/inscricaoServico" method="post">
 					<fieldset>
 						<legend>Informações pessoais</legend>
 						<label>Nome (*):</label>
@@ -26,10 +26,6 @@
 							<input type="radio" name="sexo" id="sexoF" value="F">
 							Feminino
 						</label>
-						<label>CPF:</label>
-						<input id="cpf" name="cpf" type="text" />
-						<label>Identidade:</label>
-						<input id="identidade" name="identidade" type="text" />
 						<legend>Endereço</legend>
 						<label>Logradouro (*):</label>
 						<input id="logradouro" name="logradouro" type="text" />
