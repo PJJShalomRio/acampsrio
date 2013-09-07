@@ -37,7 +37,7 @@ class ContatoHandler(RequestHandler):
         
         contato.put() 
         
-        return self.redirect('/')
+        return self.redirect('/#contato')
         
 class AdoteUmJovemHandler(RequestHandler):
     def get(self):
@@ -133,7 +133,8 @@ application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
                                       ('/inscricaoServico', InscricaoServicoHandler),
-                                      ('/login', LoginHandler)
+                                      ('/login', LoginHandler),
+                                      ('/contato', ContatoHandler)
                                      ],
                                      debug=True)
 def main():

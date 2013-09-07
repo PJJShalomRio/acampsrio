@@ -200,7 +200,7 @@ h2 {
 /* BLOCK CONTACT RIGHT */
 
 #contato .info {
-    background:#f3f3f3; 
+    background:#ccc; 
     line-height:25px;
     padding: 5px 10px;
     margin-bottom: 5px;
@@ -219,7 +219,7 @@ h2 {
 
 footer {
 	padding: 20px 0;
-	background-color: #333;
+	background-color: #ccc;
 }
 
 footer p.copyright {
