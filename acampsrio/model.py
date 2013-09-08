@@ -5,13 +5,11 @@ Copyright (C) 2013 MVM Tecnologia
 """
 
 from google.appengine.ext import db
-
 class Participante(db.Model):
     
     nome = db.StringProperty()
     dataNascimento = db.StringProperty()
-    sexo = db.StringProperty()
-    cpf = db.StringProperty()
+    sexo = db.StringProperty(   )
     identidade = db.StringProperty()
     
     logradouro = db.StringProperty()
@@ -34,8 +32,6 @@ class Participante(db.Model):
     telResidenciaContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
-    dataInscricao = db.DateTimeProperty()
-
 class Servico(db.Model):
     
     nome = db.StringProperty()
@@ -62,13 +58,10 @@ class Servico(db.Model):
     telResidenciaContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
-    dataInscricao = db.DateTimeProperty()
-    
 class Contato(db.Model):
     
     nome = db.StringProperty()
     telCelular1 = db.StringProperty()
     email = db.StringProperty()
     comentario = db.StringProperty()
-
-    dataInscricao = db.DateTimeProperty()
+    

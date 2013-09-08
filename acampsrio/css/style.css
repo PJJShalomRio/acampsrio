@@ -393,19 +393,35 @@ footer a:hover {
 }
 
 /* Inscricao  */
-form input {
+label.error{
+	color: red;
+}
+
+input {
 	width: 100%;
 }
 
-form select {
+input.error {
+	border-color: red;
+}
+
+select {
 	width: 100%;
 }
 
-form textarea {
+select.error {
+	width: 100%;
+}
+
+textarea {
     width:100%;
     resize:vertical;
     max-width:100%;
     min-height:50px;
+}
+
+textarea.error {
+	border-color: red;
 }
 
 /* SOCIAL  */

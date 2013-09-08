@@ -3,7 +3,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp import RequestHandler
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model import Participante, Servico, Contato
-import datetime
+
 from google.appengine.api import users
 
 class HomeHandler(RequestHandler):
@@ -33,7 +33,6 @@ class ContatoHandler(RequestHandler):
         contato.telCelular1 = self.request.get('telCelular1')
         contato.email = self.request.get('email')
         contato.comentario = self.request.get('comentario')
-        contato.dataInscricao = datetime.datetime.now()
         
         contato.put() 
         
@@ -76,8 +75,6 @@ class InscricaoServicoHandler(RequestHandler):
         servico.telResidenciaContato = self.request.get('telResidenciaContato')
         servico.telComercialContato = self.request.get('telComercialContato')
         
-        servico.dataInscricao = datetime.datetime.now()
-        
         servico.put() 
         
         return self.redirect('/inscricaoServico')
@@ -115,8 +112,6 @@ class InscricaoParticipanteHandler(RequestHandler):
         participante.telResidenciaContato = self.request.get('telResidenciaContato')
         participante.telComercialContato = self.request.get('telComercialContato')
         
-        participante.dataInscricao = datetime.datetime.now()
-        
         participante.put() 
         
         return self.redirect('/inscricaoParticipante')
@@ -125,7 +120,7 @@ class LoginHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            self.response.out.write(template.render('pages/admin.html', {}))
+            self.response.out.write(template.render('pages/admin.html', {'usuarioLogado':user.nickname()}))
         else:
             self.redirect(users.create_login_url(self.request.uri))
 
