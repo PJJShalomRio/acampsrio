@@ -32,6 +32,8 @@ class Participante(db.Model):
     telResidenciaContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
+    foto = db.BlobProperty()
+    
 class Servico(db.Model):
     
     nome = db.StringProperty()

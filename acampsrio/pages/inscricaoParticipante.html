@@ -10,8 +10,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="span6">
-				<form id="inscricaoParticipanteForm" name="inscricaoParticipanteForm"
-					action="/inscricaoParticipante" method="post">
+				<form id="inscricaoParticipanteForm"
+					name="inscricaoParticipanteForm" action="/inscricaoParticipante"
+					method="post" enctype="multipart/form-data">
 					<fieldset>
 						<legend>Informações pessoais</legend>
 						<label>Nome:</label>
@@ -47,7 +48,7 @@
 						<input id="telCelular1" name="telCelular1" type="text" />
 						<label>Telefone celular 2:</label>
 						<input id="telCelular2" name="telCelular2" type="text" />
-						<label>Telefone residencia:</label>
+						<label>Telefone residencial:</label>
 						<input id="telResidencial" name="telResidencial" type="text" />
 						<label>E-mail:</label>
 						<input id="email" name="email" type="text" />
@@ -71,6 +72,22 @@
 						<label>Telefone comercial:</label>
 						<input id="telComercialContato" name="telComercialContato"
 							type="text" />
+						<label>Foto (Máximo 1Mega):</label>
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+							<div class="fileupload-new thumbnail"
+								style="width: 50px; height: 50px;">
+								<img src="img/foto50x50.gif" />
+							</div>
+							<div class="fileupload-preview fileupload-exists thumbnail"
+								style="width: 50px; height: 50px;"></div>
+							<span class="btn btn-file">
+								<span class="fileupload-new">Selecionar</span>
+								<span class="fileupload-exists">Trocar</span>
+								<input id="foto" name="foto" type="file" />
+							</span>
+							<a href="#" class="btn fileupload-exists"
+								data-dismiss="fileupload">Excluir</a>
+						</div>
 						<button name="send" type="submit" class="button">Enviar</button>
 					</fieldset>
 				</form>

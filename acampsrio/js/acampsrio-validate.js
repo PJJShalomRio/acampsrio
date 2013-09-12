@@ -1,6 +1,13 @@
 $(document).ready(function() {
 
 	$('#dataNascimento').mask('00/00/0000');
+	$('#telCelular1').mask('(00) 0000-0000');
+	$('#telCelular2').mask('(00) 0000-0000');
+	$('#telResidencial').mask('(00) 0000-0000');
+	$('#telCelular1Contato').mask('(00) 0000-0000');
+	$('#telCelular2Contato').mask('(00) 0000-0000');
+	$('#telResidencialContato').mask('(00) 0000-0000');
+	$('#telComercialContato').mask('(00) 0000-0000');
 
 	$("#contatoForm").validate({
 		rules : {

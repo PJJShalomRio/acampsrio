@@ -2,6 +2,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp import RequestHandler
 from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext import db
+from google.appengine.api import images
 from model import Participante, Servico, Contato
 
 from google.appengine.api import users
@@ -111,6 +113,11 @@ class InscricaoParticipanteHandler(RequestHandler):
         participante.telCelular2Contato = self.request.get('telCelular2Contato')
         participante.telResidenciaContato = self.request.get('telResidenciaContato')
         participante.telComercialContato = self.request.get('telComercialContato')
+        
+        fotoUpload = self.request.get("foto")
+        if fotoUpload:
+            novaFoto = images.resize(fotoUpload, 90, 120)
+            participante.foto =  db.Blob(novaFoto)
         
         participante.put() 
         
