@@ -32,6 +32,10 @@ class Participante(db.Model):
     telResidenciaContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
+    ficouSabendo = db.StringListProperty()
+    
+    termoCompromisso = db.StringProperty()
+    
     foto = db.BlobProperty()
     
 class Servico(db.Model):
@@ -59,6 +63,8 @@ class Servico(db.Model):
     telCelular2Contato = db.StringProperty()
     telResidenciaContato = db.StringProperty()
     telComercialContato = db.StringProperty()
+    
+    termoCompromisso = db.StringProperty()
     
 class Contato(db.Model):
     

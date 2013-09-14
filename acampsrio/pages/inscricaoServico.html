@@ -41,12 +41,12 @@
 							<option value="RJ">Rio de Janeiro</option>
 						</select>
 						<legend>Contato</legend>
-						<label>Telefone celular 1:</label>
-						<input id="telCelular1" name="telCelular1" type="text" />
-						<label>Telefone celular 2:</label>
-						<input id="telCelular2" name="telCelular2" type="text" />
+						<label>Celular 1:</label>
+						<input id="telCelular1" name="telCelular1" placeholder="(xx) xxxx-xxxx"  type="text" />
+						<label>Celular 2:</label>
+						<input id="telCelular2" name="telCelular2" placeholder="(xx) xxxx-xxxx" type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencial" name="telResidencial" type="text" />
+						<input id="telResidencial" name="telResidencial" placeholder="(xx) xxxx-xxxx" type="text" />
 						<label>E-mail:</label>
 						<input id="email" name="email" type="text" />
 						<legend>Saúde</legend>
@@ -57,18 +57,23 @@
 						<legend>Contato em caso de emergência</legend>
 						<label>Nome:</label>
 						<input id="nomeContato" name="nomeContato" type="text" />
-						<label>Telefone celular 1:</label>
-						<input id="telCelular1Contato" name="telCelular1Contato"
+						<label>Celular 1:</label>
+						<input id="telCelular1Contato" name="telCelular1Contato" placeholder="(xx) xxxx-xxxx" 
 							type="text" />
-						<label>Telefone celular 2:</label>
-						<input id="telCelular2Contato" name="telCelular2Contato"
+						<label>Celular 2:</label>
+						<input id="telCelular2Contato" name="telCelular2Contato" placeholder="(xx) xxxx-xxxx" 
 							type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencialContato" name="telResidencialContato"
+						<input id="telResidencialContato" name="telResidencialContato" placeholder="(xx) xxxx-xxxx" 
 							type="text" />
 						<label>Telefone comercial:</label>
-						<input id="telComercialContato" name="telComercialContato"
+						<input id="telComercialContato" name="telComercialContato" placeholder="(xx) xxxx-xxxx" 
 							type="text" />
+						<legend>Termo de Compromisso</legend>
+						<label><a class="fancybox-media fancybox.iframe" href="/termoCompromisso">Ler contrato</a></label>
+						<label>Você concorda com todos os termos citados no contrato?</label>
+						<input id="termoCompromisso" name="termoCompromisso" type="checkbox" value="S">Li e concordo com todos os termos do Contrato.<br>
+						<br/>
 						<button name="send" type="submit" class="button">Enviar</button>
 					</fieldset>
 				</form>

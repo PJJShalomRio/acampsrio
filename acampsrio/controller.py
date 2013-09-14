@@ -44,6 +44,10 @@ class AdoteUmJovemHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/adoteUmJovem.html', {}))
 
+class TermoCompromissoHandler(RequestHandler):
+    def get(self):
+        self.response.out.write(template.render('pages/tempocompromisso.html', {}))
+
 class InscricaoServicoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/inscricaoServico.html', {}))
@@ -113,6 +117,8 @@ class InscricaoParticipanteHandler(RequestHandler):
         participante.telCelular2Contato = self.request.get('telCelular2Contato')
         participante.telResidenciaContato = self.request.get('telResidenciaContato')
         participante.telComercialContato = self.request.get('telComercialContato')
+        participante.termoCompromisso = self.request.get('termoCompromisso')
+        participante.ficouSabendo = self.request.get_all('ficouSabendo')
         
         fotoUpload = self.request.get("foto")
         if fotoUpload:
@@ -135,6 +141,7 @@ application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
                                       ('/inscricaoServico', InscricaoServicoHandler),
+                                      ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/login', LoginHandler),
                                       ('/contato', ContatoHandler)
                                      ],
