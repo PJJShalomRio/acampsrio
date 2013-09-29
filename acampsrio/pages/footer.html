@@ -3,14 +3,23 @@
 	<!-- COPYRIGHT  -->
 	<div class="container">
 		<div class="row">
-			<div class="span4" align="left" >
-				<a href="http://www.comshalom.org/projeto-juventude/" target="_blank">
+			<div class="span4" align="left">
+				<a href="http://www.comshalom.org/projeto-juventude/"
+					target="_blank">
 					<img alt="Projeto Juventude para Jesus" src="img/logo_pjj.png">
 				</a>
 			</div>
-			<div class="span4" align="center" >
+			<div class="span4" align="center">
 				<p class="copyright">&copy; 2013-2014 Acamp's Rio 2014</p>
-				<a href="/login"><p class="copyright">Login</p></a>
+				{% if user %}
+				<a href="/logout">
+					<p class="copyright">Logout</p>
+				</a>
+				{% else %}
+				<a href="/login">
+					<p class="copyright">Login</p>
+				</a>
+				{% endif %}
 			</div>
 			<div class="span4" align="right">
 				<a href="http://www.comshalom.org" target="_blank">

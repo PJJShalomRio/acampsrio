@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>{% include 'header.html'%}
+</head>
+<body>
+	{% include 'menu.html'%}
+	<div class="row">
+		<div class="span12 centered">
+			<h2>Lista de Servos</h2>
+			<div class="breaker">
+				<span class="left"></span>
+				<div class="feather"></div>
+				<span class="right"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="span12">
+				<div class="tabela">
+					<table>
+						<tr>
+							<td>Nome</td>
+							<td>Email</td>
+							<td>Celular</td>
+							<td>Ações</td>
+						</tr>
+						{% for servo in servicos %}
+						<tr>
+							<td>{{ servo.nome }}</td>
+							<td>{{ servo.email }}</td>
+							<td>{{ servo.telCelular1 }}</td>
+							<td>
+								<a href="#">
+									<img src="img/icons/icon-address-grey.png">
+								</a>
+								<a href="#">
+									<img src="img/icons/icon-email-grey.png">
+								</a>
+								<a href="#">
+									<img src="img/icons/icon-phone-grey.png">
+								</a>
+								<a href="#">
+									<img src="img/icons/icon-time-grey.png">
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- FOOTER  -->
+	{% include 'footer.html'%}
+	<!-- END FOOTER -->
+</body>
+</html>

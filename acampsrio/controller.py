@@ -58,7 +58,6 @@ class InscricaoServicoHandler(RequestHandler):
         servico.nome = self.request.get('nome')
         servico.dataNascimento = self.request.get('dataNascimento')
         servico.sexo = self.request.get('sexo')
-        servico.cpf = self.request.get('cpf')
         servico.identidade = self.request.get('identidade')
         
         servico.logradouro = self.request.get('logradouro')
@@ -95,7 +94,6 @@ class InscricaoParticipanteHandler(RequestHandler):
         participante.nome = self.request.get('nome')
         participante.dataNascimento = self.request.get('dataNascimento')
         participante.sexo = self.request.get('sexo')
-        participante.cpf = self.request.get('cpf')
         participante.identidade = self.request.get('identidade')
         
         participante.logradouro = self.request.get('logradouro')
@@ -123,7 +121,7 @@ class InscricaoParticipanteHandler(RequestHandler):
         fotoUpload = self.request.get("foto")
         if fotoUpload:
             novaFoto = images.resize(fotoUpload, 90, 120)
-            participante.foto =  db.Blob(novaFoto)
+            participante.foto = db.Blob(novaFoto)
         
         participante.put() 
         
@@ -132,10 +130,40 @@ class InscricaoParticipanteHandler(RequestHandler):
 class LoginHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
-        if user:
+        if user and users.is_current_user_admin():
             self.response.out.write(template.render('pages/admin.html', {'usuarioLogado':user.nickname()}))
         else:
             self.redirect(users.create_login_url(self.request.uri))
+            
+class LogoutHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            users.create_logout_url('/')
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class ListaParticipantesHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            partcipantes = Participante.all().order('nome')
+            results = partcipantes.fetch(5)
+            
+            self.response.out.write(template.render('pages/listaParticipantes.html', {'participantes':results}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class ListaServicosHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            servicos = Servico.all().order('nome')
+            results = servicos.fetch(5)
+            
+            self.response.out.write(template.render('pages/listaServicos.html', {'servicos':results}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
 
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
@@ -143,7 +171,10 @@ application = webapp.WSGIApplication(
                                       ('/inscricaoServico', InscricaoServicoHandler),
                                       ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/login', LoginHandler),
-                                      ('/contato', ContatoHandler)
+                                      ('/logout', LogoutHandler),
+                                      ('/contato', ContatoHandler),
+                                      ('/listaParticipantes', ListaParticipantesHandler),
+                                      ('/listaServicos', ListaServicosHandler)
                                      ],
                                      debug=True)
 def main():
