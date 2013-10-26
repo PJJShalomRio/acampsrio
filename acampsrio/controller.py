@@ -1,12 +1,9 @@
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-from google.appengine.ext.webapp import RequestHandler
+from google.appengine.api import images, users
+from google.appengine.ext import db, webapp
+from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext import db
-from google.appengine.api import images
 from model import Participante, Servico, Contato
 
-from google.appengine.api import users
 
 class HomeHandler(RequestHandler):
     def get(self):
@@ -129,6 +126,7 @@ class InscricaoParticipanteHandler(RequestHandler):
 
 class LoginHandler(RequestHandler):
     def get(self):
+        
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             self.response.out.write(template.render('pages/admin.html', {'usuarioLogado':user.nickname()}))
@@ -147,21 +145,20 @@ class ListaParticipantesHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            partcipantes = Participante.all().order('nome')
-            results = partcipantes.fetch(5)
+            results = Participante.all().order('nome')
             
-            self.response.out.write(template.render('pages/listaParticipantes.html', {'participantes':results}))
-        else:
-            self.response.out.write(template.render('pages/index.html', {}))
+            self.response.out.write(template.render('pages/listaParticipantes.html', 
+                                                    {'participantes':results, 'total':results.count()}))
+        
             
 class ListaServicosHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            servicos = Servico.all().order('nome')
-            results = servicos.fetch(5)
+            results = Servico.all().order('nome')
             
-            self.response.out.write(template.render('pages/listaServicos.html', {'servicos':results}))
+            self.response.out.write(template.render('pages/listaServicos.html', 
+                                                    {'servicos':results, 'total':results.count()}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
 

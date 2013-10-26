@@ -1,61 +1,38 @@
 <!doctype html>
 <html>
-<head>{% include 'header.html'%}
+<head>{% include 'header-reports.html'%}
 </head>
 <body>
-	{% include 'menu.html'%}
-	<div class="row">
-		<div class="span12 centered">
-			<h2>Lista de Servos</h2>
-			<div class="breaker">
-				<span class="left"></span>
-				<div class="feather"></div>
-				<span class="right"></span>
-			</div>
-		</div>
-	</div>
+	<img src="img/logo_small.png">
+	<h2 align="center">Lista de Serviço</h2>
 
 	<div class="container">
 
-		<div class="row">
-			<div class="span12">
+		<div>
+			<div>
 				<div class="tabela">
 					<table>
 						<tr>
 							<td>Nome</td>
 							<td>Email</td>
 							<td>Celular</td>
-							<td>Ações</td>
 						</tr>
-						{% for servo in servicos %}
+						{% for servico in servicos %}
 						<tr>
-							<td>{{ servo.nome }}</td>
-							<td>{{ servo.email }}</td>
-							<td>{{ servo.telCelular1 }}</td>
-							<td>
-								<a href="#">
-									<img src="img/icons/icon-address-grey.png">
-								</a>
-								<a href="#">
-									<img src="img/icons/icon-email-grey.png">
-								</a>
-								<a href="#">
-									<img src="img/icons/icon-phone-grey.png">
-								</a>
-								<a href="#">
-									<img src="img/icons/icon-time-grey.png">
-								</a>
-							</td>
+							<td>{{ servico.nome }}</td>
+							<td>{{ servico.email }}</td>
+							<td>{{ servico.telCelular1 }}</td>
 						</tr>
 						{% endfor %}
+						<tr>
+							<td>TOTAL</td>
+							<td></td>
+							<td>{{ total }}</td>
+						</tr>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- FOOTER  -->
-	{% include 'footer.html'%}
-	<!-- END FOOTER -->
 </body>
 </html>
