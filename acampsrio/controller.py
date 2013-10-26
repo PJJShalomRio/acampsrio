@@ -45,6 +45,10 @@ class TermoCompromissoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/tempocompromisso.html', {}))
 
+class RealizarPagamentoHandler(RequestHandler):
+    def get(self):
+        self.response.out.write(template.render('pages/realizarPagamento.html', {}))
+
 class InscricaoServicoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/inscricaoServico.html', {}))
@@ -79,7 +83,7 @@ class InscricaoServicoHandler(RequestHandler):
         
         servico.put() 
         
-        return self.redirect('/inscricaoServico')
+        return self.redirect('/realizarPagamento')
 
 class InscricaoParticipanteHandler(RequestHandler):
     def get(self):
@@ -122,7 +126,7 @@ class InscricaoParticipanteHandler(RequestHandler):
         
         participante.put() 
         
-        return self.redirect('/inscricaoParticipante')
+        return self.redirect('/realizarPagamento')
 
 class LoginHandler(RequestHandler):
     def get(self):
@@ -141,24 +145,67 @@ class LogoutHandler(RequestHandler):
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
-class ListaParticipantesHandler(RequestHandler):
+class RelacaoParticipantesInscritosHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             results = Participante.all().order('nome')
             
-            self.response.out.write(template.render('pages/listaParticipantes.html', 
-                                                    {'participantes':results, 'total':results.count()}))
+            self.response.out.write(template.render('pages/reports/relacaoParticipantesInscritos.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
         
-            
-class ListaServicosHandler(RequestHandler):
+class RelacaoServicosInscritosHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             results = Servico.all().order('nome')
             
-            self.response.out.write(template.render('pages/listaServicos.html', 
-                                                    {'servicos':results, 'total':results.count()}))
+            self.response.out.write(template.render('pages/reports/relacaoServicosInscritos.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class RelacaoCrachasParticipantesHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            results = Servico.all().order('nome')
+            
+            self.response.out.write(template.render('pages/reports/relacaoCrachasParticipantes.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            results = Servico.all().order('nome')
+            
+            self.response.out.write(template.render('pages/reports/relacaoEstatisticaParticipantesInscritos.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            results = Servico.all().order('nome')
+            
+            self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
+        else:
+            self.response.out.write(template.render('pages/index.html', {}))
+            
+class RelacaoPessoasPorOnibusHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            results = Servico.all().order('nome')
+            
+            self.response.out.write(template.render('pages/reports/relacaoPessoasPorOnibus.html', 
+                                                    {'listaItens':results, 'total':results.count()}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
 
@@ -170,8 +217,13 @@ application = webapp.WSGIApplication(
                                       ('/login', LoginHandler),
                                       ('/logout', LogoutHandler),
                                       ('/contato', ContatoHandler),
-                                      ('/listaParticipantes', ListaParticipantesHandler),
-                                      ('/listaServicos', ListaServicosHandler)
+                                      ('/realizarPagamento', RealizarPagamentoHandler),
+                                      ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
+                                      ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
+                                      ('/relacaoCrachasParticipantes', RelacaoCrachasParticipantesHandler),
+                                      ('/relacaoEstatisticaParticipantesInscritos', RelacaoEstatisticaParticipantesInscritosHandler),
+                                      ('/relacaoPessoasPorOnibus', RelacaoPessoasPorOnibusHandler),
+                                      ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler)
                                      ],
                                      debug=True)
 def main():

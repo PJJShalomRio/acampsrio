@@ -4,78 +4,93 @@
 </head>
 <body>
 	{% include 'menu.html'%}
-	<div class="row">
-		<div class="span12 centered">
-			<h2>Área administrativa</h2>
-			<div class="breaker">
-				<span class="left"></span>
-				<div class="feather"></div>
-				<span class="right"></span>
-			</div>
-		</div>
-	</div>
 
-	<div class="container">
-		<p>Bem vindo {{usuarioLogado}}</p>
+	<section id="admin">
+		<div class="container">
 
-		<div class="row">
-			<div class="span6">
-				<div class="box">
-					<h6>
-						<a href="/listaParticipantes" target="_blank">
-							<img src="img/icons/icon-pdf.png">
-							<strong>Relação Participantes Inscritos</strong>
-						</a> 
-					</h6>
+			<div class="row">
+				<div class="span12 centered">
+					<h2>Área administrativa</h2>
+					<div class="breaker">
+						<span class="left"></span>
+						<div class="feather"></div>
+						<span class="right"></span>
+					</div>
 				</div>
 			</div>
-			<div class="span6">
-				<div class="box">
-					<h6>
-						<a href="/listaServicos">
-							<img src="img/icons/icon-pdf.png" target="_blank">
-							<strong>Relação Servos Inscritos</strong>
-						</a>
-					</h6>
 
+			<div class="row">
+				<p>Bem vindo {{usuarioLogado}}</p>
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoParticipantesInscritos" target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Relação Participantes Inscritos</strong>
+							</a>
+						</h6>
+					</div>
+				</div>
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoServicosInscritos" target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Relação Servos Inscritos</strong>
+							</a>
+						</h6>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoPessoasPorOnibus" target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Relação Participantes por Ônibus</strong>
+							</a>
+						</h6>
+					</div>
+				</div>
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoParticipantesPorFamilia" target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Relação Participantes por Família</strong>
+							</a>
+						</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoCrachasParticipantes" target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Imprimir Crachá</strong>
+							</a>
+						</h6>
+					</div>
+				</div>
+				<div class="span6">
+					<div class="box">
+						<h6>
+							<a href="/relacaoEstatisticaParticipantesInscritos"
+								target="_blank">
+								<img src="img/icons/icon-pdf.png">
+								<strong>Estatísticas dos Participantes</strong>
+							</a>
+						</h6>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="span6">
-				<div class="box">
-					<h6>
-						<a href="/listaServicos">
-							<img src="img/icons/icon-pdf.png" target="_blank">
-							<strong>Relação Participantes por Ônibus</strong>
-						</a>
-					</h6>
-				</div>
-			</div>
-			<div class="span6">
-				<div class="box">
-					<h6>
-						<a href="/listaServicos">
-							<img src="img/icons/icon-pdf.png"  target="_blank">
-							<strong>Relação Participantes por Famílias</strong>
-						</a>
-					</h6>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span6">
-				<div class="box">
-					<h6>
-						<a href="/listaServicos">
-							<img src="img/icons/icon-pdf.png" target="_blank">
-							<strong>Imprimir Crachá</strong>
-						</a>
-					</h6>
-				</div>
-			</div>
-		</div>
-	</div>
+
+	</section>
 
 	<!-- FOOTER  -->
 	{% include 'footer.html'%}
