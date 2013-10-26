@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?eclipse-pydev version="1.0"?>
-
-<pydev_project>
+<?eclipse-pydev version="1.0"?><pydev_project>
 <pydev_variables_property name="org.python.pydev.PROJECT_VARIABLE_SUBSTITUTION">
 <key>GOOGLE_APP_ENGINE</key>
 <value>/home/matheus/Shalom/google_appengine</value>
@@ -31,7 +29,6 @@
 <path>${GOOGLE_APP_ENGINE}/lib/markupsafe-0.15</path>
 <path>${GOOGLE_APP_ENGINE}/lib/oauth2</path>
 <path>${GOOGLE_APP_ENGINE}/lib/prettytable</path>
-<path>${GOOGLE_APP_ENGINE}/lib/protorpc</path>
 <path>${GOOGLE_APP_ENGINE}/lib/python-gflags/tests</path>
 <path>${GOOGLE_APP_ENGINE}/lib/setuptools-0.6c11</path>
 <path>${GOOGLE_APP_ENGINE}/lib/simplejson</path>

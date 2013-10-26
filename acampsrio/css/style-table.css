@@ -21,6 +21,9 @@
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
+	border: 1px solid #000000;
+	border-width: 1px 1px 1px 1px;
+	border-spacing: 0px;
 }
 
 .tabela tr:last-child td:last-child {
@@ -61,7 +64,7 @@
 
 .tabela td {
 	vertical-align: middle;
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 	text-align: left;
 	padding: 7px;
 	font-size: 10px;
@@ -74,7 +77,7 @@
 	background-color: #cccccc;
 	border: 0px solid #000000;
 	text-align: center;
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 	font-size: 14px;
 	font-family: Arial;
 	font-weight: bold;
@@ -82,18 +85,18 @@
 }
 
 .tabela tr td:last-child {
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 }
 
 .tabela tr:last-child td:last-child {
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 }
 
 .tabela tr:first-child td {
 	background-color: #cccccc;
 	border: 0px solid #000000;
 	text-align: center;
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 	font-size: 14px;
 	font-family: Arial;
 	font-weight: bold;
@@ -105,9 +108,9 @@
 }
 
 .tabela tr:first-child td:first-child {
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 }
 
 .tabela tr:first-child td:last-child {
-	border-width: 0px 0px 0px 0px;
+	border-width: 1px 1px 1px 1px;
 }

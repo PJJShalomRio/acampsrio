@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
-<head>{% include 'header-reports.html'%}
-<title>Acamp's Rio 2014 - Estatística dos Participantes Inscritos</title>
+<head>
+{% include 'header-reports.html'%}
+<title>Acamp's Rio 2014 - Estatística dos Participantes
+	Inscritos</title>
 </head>
 <body>
 	<img src="img/logo_small.png">
@@ -12,31 +14,56 @@
 		<a href="#" onclick="window.print(); return false;">
 			<img src="img/icons/icon-printer.png">
 		</a>
+		
+		<div class="tabela">
+			<table>
+				<tr>
+					<td>Número de Participante</td>
+					<td>{{ totalParticipantes }}</td>
+				</tr>
+			</table>
+		</div>
 
-		<div>
-			<div>
-				<div class="tabela">
-					<table>
-						<tr>
-							<td>Nome</td>
-							<td>Email</td>
-							<td>Celular</td>
-						</tr>
-						{% for item in listaItens %}
-						<tr>
-							<td>{{ item.nome }}</td>
-							<td>{{ item.email }}</td>
-							<td>{{ item.telCelular1 }}</td>
-						</tr>
-						{% endfor %}
-						<tr>
-							<td>TOTAL</td>
-							<td></td>
-							<td>{{ total }}</td>
-						</tr>
-					</table>
-				</div>
-			</div>
+		<h3 align="center">Participantes por Sexo</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<td>Feminino</td>
+					<td>{{ totalFeminino }}</td>
+				</tr>
+				<tr>
+					<td>Masculino</td>
+					<td>{{ totalMasculino }}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<h3 align="center">Participantes por Idade</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<td>Idade</td>
+					<td>Total</td>
+				</tr>
+				<tr>
+					<td>{{ idade }}</td>
+					<td>{{ totalIdade }}</td>
+				</tr>
+			</table>
+		</div>
+		
+		<h3 align="center">Participantes por Bairro</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<td>Bairro</td>
+					<td>Total</td>
+				</tr>
+				<tr>
+					<td>{{ bairro }}</td>
+					<td>{{ totalBairro }}</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>

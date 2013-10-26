@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-<head>{% include 'header-reports.html'%}
+<head>
+{% include 'header-reports.html'%}
 <title>Acamp's Rio 2014 - Relação de Pessoas por Ônibus</title>
 </head>
 <body>
@@ -13,30 +14,25 @@
 			<img src="img/icons/icon-printer.png">
 		</a>
 
-		<div>
-			<div>
-				<div class="tabela">
-					<table>
-						<tr>
-							<td>Nome</td>
-							<td>Email</td>
-							<td>Celular</td>
-						</tr>
-						{% for item in listaItens %}
-						<tr>
-							<td>{{ item.nome }}</td>
-							<td>{{ item.email }}</td>
-							<td>{{ item.telCelular1 }}</td>
-						</tr>
-						{% endfor %}
-						<tr>
-							<td>TOTAL</td>
-							<td></td>
-							<td>{{ total }}</td>
-						</tr>
-					</table>
-				</div>
-			</div>
+
+		<div class="tabela">
+			<table>
+				<tr>
+					<td>Nome</td>
+					<td>Ônibus</td>
+				</tr>
+				{% for item in listaItens %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.onibus }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td>TOTAL</td>
+					<td></td>
+					<td>{{ total }}</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>
