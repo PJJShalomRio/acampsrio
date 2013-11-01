@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
 	$('#dataNascimento').mask('00/00/0000');
-	$('#telCelular1').mask('(00) 0000-0000');
-	$('#telCelular2').mask('(00) 0000-0000');
+	$('#telCelular1').mask('(00) 00000-0000');
+	$('#telCelular2').mask('(00) 00000-0000');
 	$('#telResidencial').mask('(00) 0000-0000');
-	$('#telCelular1Contato').mask('(00) 0000-0000');
-	$('#telCelular2Contato').mask('(00) 0000-0000');
+	$('#telCelular1Contato').mask('(00) 00000-0000');
+	$('#telCelular2Contato').mask('(00) 00000-0000');
 	$('#telResidencialContato').mask('(00) 0000-0000');
 	$('#telComercialContato').mask('(00) 0000-0000');
 
@@ -16,7 +16,7 @@ $(document).ready(function() {
 			},
 			telCelular1 : {
 				required : true,
-				minlength: 14
+				minlength: 15
 				
 			},
 			email : {
@@ -74,10 +74,10 @@ $(document).ready(function() {
 			},
 			telCelular1 : {
 				required : true,
-				minlength: 14
+				minlength: 15
 			},
 			telCelular2 : {
-				minlength: 14
+				minlength: 15
 			},
 			telResidencial : {
 				minlength: 14
@@ -91,10 +91,10 @@ $(document).ready(function() {
 			},
 			telCelular1Contato : {
 				required : true,
-				minlength: 14
+				minlength: 15
 			},
 			telCelular2Contato : {
-				minlength: 14
+				minlength: 15
 			},
 			telResidencialContato : {
 				minlength: 14
@@ -194,10 +194,10 @@ $(document).ready(function() {
 			},
 			telCelular1 : {
 				required : true,
-				minlength: 14
+				minlength: 15
 			},
 			telCelular2 : {
-				minlength: 14
+				minlength: 15
 			},
 			telResidencial : {
 				minlength: 14
@@ -211,13 +211,10 @@ $(document).ready(function() {
 			},
 			telCelular1Contato : {
 				required : true,
-				minlength: 14
+				minlength: 15
 			},
 			telCelular2Contato : {
-				minlength: 14
-			},
-			telCelular2Contato : {
-				minlength: 14
+				minlength: 15
 			},
 			telResidencialContato : {
 				minlength: 14
