@@ -141,7 +141,7 @@ class LogoutHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            users.create_logout_url('/')
+            return self.redirect(users.create_logout_url('/'))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
