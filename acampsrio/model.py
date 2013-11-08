@@ -38,6 +38,8 @@ class Participante(db.Model):
     
     foto = db.BlobProperty()
     
+    dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
+    
 class Servico(db.Model):
     
     nome = db.StringProperty()
@@ -66,10 +68,14 @@ class Servico(db.Model):
     
     termoCompromisso = db.StringProperty()
     
+    dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
+    
 class Contato(db.Model):
     
     nome = db.StringProperty()
     telCelular1 = db.StringProperty()
     email = db.StringProperty()
     comentario = db.StringProperty()
+    
+    dataContato = db.DateTimeProperty(auto_now=True, auto_now_add=True)
     

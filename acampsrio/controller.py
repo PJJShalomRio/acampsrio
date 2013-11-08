@@ -1,3 +1,4 @@
+from datetime import date
 from google.appengine.api import images, users
 from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import RequestHandler, template
@@ -180,10 +181,36 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Servico.all().order('nome')
+            
+            totalParticipantes = Participante.all().count()
+            totalFeminino = Participante.all().filter('sexo = ', 'F').count()
+            totalMasculino = totalParticipantes - totalFeminino
+            
+            participantesPorBairro = dict()
+            for participante in Participante.all():
+                qtde = participantesPorBairro.get(participante.bairro)
+                if qtde:
+                    participantesPorBairro[participante.bairro] = qtde + 1
+                else:
+                    participantesPorBairro[participante.bairro] = 1
+                    
+            participantesPorIdade= dict()
+            for participante in Participante.all():
+                today = date.today()
+                idade = today.year - int(participante.dataNascimento.split('/')[2])
+                qtde = participantesPorIdade.get(idade)
+                if qtde:
+                    participantesPorIdade[idade] = qtde + 1
+                else:
+                    participantesPorIdade[idade] = 1
             
             self.response.out.write(template.render('pages/reports/relacaoEstatisticaParticipantesInscritos.html', 
-                                                    {'listaItens':results, 'total':results.count()}))
+                                                    {'totalParticipantes':totalParticipantes,
+                                                     'totalFeminino':totalFeminino,
+                                                     'totalMasculino':totalMasculino,
+                                                     'participantesPorBairro':participantesPorBairro,
+                                                     'participantesPorIdade':participantesPorIdade
+                                                     }))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             

@@ -45,10 +45,12 @@
 					<td>Idade</td>
 					<td>Total</td>
 				</tr>
+				{% for key,value in participantesPorIdade.items %}
 				<tr>
-					<td>{{ idade }}</td>
-					<td>{{ totalIdade }}</td>
+					<td>{{ key }}</td>
+					<td>{{ value }}</td>
 				</tr>
+				{% endfor %}
 			</table>
 		</div>
 		
@@ -59,10 +61,12 @@
 					<td>Bairro</td>
 					<td>Total</td>
 				</tr>
+				{% for key,value in participantesPorBairro.items %}
 				<tr>
-					<td>{{ bairro }}</td>
-					<td>{{ totalBairro }}</td>
+					<td>{{ key }}</td>
+					<td>{{ value }}</td>
 				</tr>
+				{% endfor %}
 			</table>
 		</div>
 	</div>

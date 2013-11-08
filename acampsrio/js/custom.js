@@ -16,7 +16,7 @@ $(window).load(function() {
         animation: "fade",
         controlNav: false,
         directionNav: false,
-        slideshowSpeed: 1500,
+        slideshowSpeed: 1200,
     });
 });
 
