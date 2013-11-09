@@ -4,12 +4,13 @@
 Copyright (C) 2013 MVM Tecnologia
 """
 
+from google.appengine.api import mail
 from google.appengine.ext import db
 class Participante(db.Model):
     
     nome = db.StringProperty()
     dataNascimento = db.StringProperty()
-    sexo = db.StringProperty(   )
+    sexo = db.StringProperty()
     identidade = db.StringProperty()
     
     logradouro = db.StringProperty()
@@ -69,7 +70,15 @@ class Servico(db.Model):
     termoCompromisso = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
-    
+
+class Familia():
+    cor = str
+    filhos = list()
+
+class Onibus():
+    numero = str
+    pessoas = list()
+  
 class Contato(db.Model):
     
     nome = db.StringProperty()
@@ -78,4 +87,12 @@ class Contato(db.Model):
     comentario = db.StringProperty()
     
     dataContato = db.DateTimeProperty(auto_now=True, auto_now_add=True)
+     
+    def enviarEmail(self):
+            mail.send_mail(sender="contato@acampsrio.com.br",
+            to="mtzimba@gmail.com",
+            subject="[ACAMPSRIO] - Contato",
+            body="Nome: " + self.nome + "\nCelular: " + self.telCelular1 + "\nEmail: " + self.email + "\nMensagem: " + self.comentario)
+            
+
     

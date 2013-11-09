@@ -3,7 +3,7 @@ from google.appengine.api import images, users
 from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from model import Participante, Servico, Contato
+from model import Participante, Servico, Contato, Familia, Onibus
 
 
 class HomeHandler(RequestHandler):
@@ -35,6 +35,7 @@ class ContatoHandler(RequestHandler):
         contato.comentario = self.request.get('comentario')
         
         contato.put() 
+        contato.enviarEmail()
         
         return self.redirect('/#contato')
         
@@ -170,10 +171,10 @@ class RelacaoCrachasParticipantesHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Servico.all().order('nome')
+            results = Participante.all()
             
             self.response.out.write(template.render('pages/reports/relacaoCrachasParticipantes.html', 
-                                                    {'listaItens':results, 'total':results.count()}))
+                                                    {'listaItens':results}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
@@ -218,10 +219,18 @@ class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Servico.all().order('nome')
+            participantes = Participante.all()
+            
+            familias = list()
+            for x in ['Vermelha', 'Branca', 'Preta', 'Verde', 'Azul', 'Coral']:
+                familia = Familia()
+                familia.cor = x
+                familia.filhos = participantes
+                familia.total = participantes.count()
+                familias.append(familia)
             
             self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html', 
-                                                    {'listaItens':results, 'total':results.count()}))
+                                                    {'familias':familias}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
@@ -229,10 +238,18 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Servico.all().order('nome')
+            participantes = Participante.all()
+            
+            listaOnibus = list()
+            for x in [1,2,3,4,5,6,7]:
+                onibus = Onibus()
+                onibus.numero = x
+                onibus.pessoas = participantes
+                onibus.total = participantes.count()
+                listaOnibus.append(onibus)
             
             self.response.out.write(template.render('pages/reports/relacaoPessoasPorOnibus.html', 
-                                                    {'listaItens':results, 'total':results.count()}))
+                                                    {'listaOnibus':listaOnibus}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
 

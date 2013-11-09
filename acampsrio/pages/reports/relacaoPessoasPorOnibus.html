@@ -14,25 +14,28 @@
 			<img src="img/icons/icon-printer.png">
 		</a>
 
-
+		{% for onibus in listaOnibus %}
+		<h3 align="center">Ônibus {{ onibus.numero }}</h3>
 		<div class="tabela">
 			<table>
 				<tr>
-					<td>Nome</td>
-					<td>Ônibus</td>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
 				</tr>
-				{% for item in listaItens %}
+				{% for item in onibus.pessoas %}
 				<tr>
 					<td>{{ item.nome }}</td>
-					<td>{{ item.onibus }}</td>
+					<td>{{ item.dataNascimento }}</td>
 				</tr>
 				{% endfor %}
 				<tr>
-					<td>TOTAL</td>
-					<td>{{ total }}</td>
+					<th>TOTAL</th>
+					<th>{{ onibus.total }}</th>
 				</tr>
 			</table>
 		</div>
+		<br>
+		{% endfor %}
 	</div>
 </body>
 </html>

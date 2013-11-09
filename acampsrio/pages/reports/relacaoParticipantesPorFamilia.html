@@ -14,25 +14,28 @@
 			<img src="img/icons/icon-printer.png">
 		</a>
 
-
+		{% for familia in familias %}
+		<h3 align="center">Família {{ familia.cor }}</h3>
 		<div class="tabela">
 			<table>
 				<tr>
-					<td>Nome</td>
-					<td>Família</td>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
 				</tr>
-				{% for item in listaItens %}
+				{% for item in familia.filhos %}
 				<tr>
 					<td>{{ item.nome }}</td>
-					<td>{{ item.familia }}</td>
+					<td>{{ item.dataNascimento }}</td>
 				</tr>
 				{% endfor %}
 				<tr>
-					<td>TOTAL</td>
-					<td>{{ total }}</td>
+					<th>TOTAL</th>
+					<th>{{ familia.total }}</th>
 				</tr>
 			</table>
 		</div>
+		<br>
+		{% endfor %}
 	</div>
 </body>
 </html>

@@ -14,26 +14,19 @@
 		<a href="#" onclick="window.print(); return false;">
 			<img src="img/icons/icon-printer.png">
 		</a>
-		
-		<div class="tabela">
-			<table>
-				<tr>
-					<td>Número de Participante</td>
-					<td>{{ totalParticipantes }}</td>
-				</tr>
-			</table>
-		</div>
 
 		<h3 align="center">Participantes por Sexo</h3>
 		<div class="tabela">
 			<table>
 				<tr>
-					<td>Feminino</td>
-					<td>{{ totalFeminino }}</td>
+					<th>Feminino</th>
+					<th>Masculino</th>
+					<th>Total de Participante</th>
 				</tr>
 				<tr>
-					<td>Masculino</td>
+					<td>{{ totalFeminino }}</td>
 					<td>{{ totalMasculino }}</td>
+					<td>{{ totalParticipantes }}</td>
 				</tr>
 			</table>
 		</div>
@@ -42,8 +35,8 @@
 		<div class="tabela">
 			<table>
 				<tr>
-					<td>Idade</td>
-					<td>Total</td>
+					<th>Idade</th>
+					<th>Total</th>
 				</tr>
 				{% for key,value in participantesPorIdade.items %}
 				<tr>
@@ -58,8 +51,8 @@
 		<div class="tabela">
 			<table>
 				<tr>
-					<td>Bairro</td>
-					<td>Total</td>
+					<th>Bairro</th>
+					<th>Total</th>
 				</tr>
 				{% for key,value in participantesPorBairro.items %}
 				<tr>
