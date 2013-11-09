@@ -84,7 +84,7 @@ class Contato(db.Model):
     nome = db.StringProperty()
     telCelular1 = db.StringProperty()
     email = db.StringProperty()
-    comentario = db.StringProperty()
+    comentario = db.StringProperty(multiline=True)
     
     dataContato = db.DateTimeProperty(auto_now=True, auto_now_add=True)
      
