@@ -37,8 +37,6 @@ class Participante(db.Model):
     
     termoCompromisso = db.StringProperty()
     
-    foto = db.BlobProperty()
-    
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
     
 class Servico(db.Model):
