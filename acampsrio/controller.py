@@ -45,7 +45,7 @@ class AdoteUmJovemHandler(RequestHandler):
 
 class TermoCompromissoHandler(RequestHandler):
     def get(self):
-        self.response.out.write(template.render('pages/tempocompromisso.html', {}))
+        self.response.out.write(template.render('pages/termocompromisso.html', {}))
 
 class RealizarPagamentoHandler(RequestHandler):
     def get(self):

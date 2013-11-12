@@ -90,7 +90,7 @@ class Contato(db.Model):
      
     def enviarEmail(self):
             mail.send_mail(sender="contato@acampsrio.com.br",
-            to="mtzimba@gmail.com",
+            to="acampsrio@comshalom.org",
             subject="[ACAMPSRIO] - Contato",
             body="Nome: " + self.nome + "\nCelular: " + self.telCelular1 + "\nEmail: " + self.email + "\nMensagem: " + self.comentario)
             
