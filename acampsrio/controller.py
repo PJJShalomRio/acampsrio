@@ -55,6 +55,10 @@ class RealizarPagamentoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/realizarPagamento.html', {}))
 
+class RealizarPagamentoServicoHandler(RequestHandler):
+    def get(self):
+        self.response.out.write(template.render('pages/realizarPagamentoServico.html', {}))
+
 class InscricaoServicoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/inscricaoServico.html', {}))
@@ -93,7 +97,7 @@ class InscricaoServicoHandler(RequestHandler):
             self.response.out.write(template.render('pages/errointerno.html', {}))
             return e
         
-        return self.redirect('/realizarPagamento')
+        return self.redirect('/realizarPagamentoServico')
 
 class InscricaoParticipanteHandler(RequestHandler):
     def get(self):
@@ -268,6 +272,7 @@ application = webapp.WSGIApplication(
                                       ('/logout', LogoutHandler),
                                       ('/contato', ContatoHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
+                                      ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
                                       ('/relacaoCrachasParticipantes', RelacaoCrachasParticipantesHandler),

@@ -221,9 +221,6 @@ $(document).ready(function() {
 			},
 			telComercialContato : {
 				minlength: 14
-			},
-			termoCompromisso : {
-				required : true
 			}
 		},
 		messages : {
@@ -278,9 +275,6 @@ $(document).ready(function() {
 			},
 			telComercialContato : {
 				minlength: "Telefone comercial inválido."
-			},
-			termoCompromisso : {
-				required : "A inscrição só será aceita se você concordar com todos os termos citados no contrato."
 			}
 		}
 	});

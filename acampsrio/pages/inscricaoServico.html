@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="pt-br">
 <head>{% include 'header.html'%}
 </head>
 <body>
@@ -12,13 +12,14 @@
 			<div class="span6">
 				<form id="inscricaoServicoForm" name="inscricaoServicoForm"
 					action="/inscricaoServico" method="post">
+					<p>Campos com * são obrigatórios</p>
 					<fieldset>
 						<legend>Informações pessoais</legend>
-						<label>Nome:</label>
+						<label>Nome *:</label>
 						<input id="nome" name="nome" type="text" />
-						<label>Data de nascimento:</label>
+						<label>Data de nascimento *:</label>
 						<input id="dataNascimento" name="dataNascimento" type="text" />
-						<label>Sexo:</label>
+						<label>Sexo *:</label>
 						<label>
 							<input type="radio" name="sexo" id=sexoM value="M">
 							Masculino
@@ -28,26 +29,29 @@
 							Feminino
 						</label>
 						<legend>Endereço</legend>
-						<label>Logradouro:</label>
+						<label>Logradouro *:</label>
 						<input id="logradouro" name="logradouro" type="text" />
 						<label>Complemento:</label>
 						<input id="complemento" name="complemento" type="text" />
-						<label>Cidade:</label>
+						<label>Cidade *:</label>
 						<input id="cidade" name="cidade" type="text" />
-						<label>Bairro:</label>
+						<label>Bairro *:</label>
 						<input id="bairro" name="bairro" type="text" />
-						<label>UF:</label>
-						<select id="uf">
+						<label>UF *:</label>
+						<select id="uf" name="uf">
 							<option value="RJ">Rio de Janeiro</option>
 						</select>
 						<legend>Contato</legend>
-						<label>Celular 1:</label>
-						<input id="telCelular1" name="telCelular1" placeholder="(xx) xxxxx-xxxx"  type="text" />
+						<label>Celular 1 *:</label>
+						<input id="telCelular1" name="telCelular1"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Celular 2:</label>
-						<input id="telCelular2" name="telCelular2" placeholder="(xx) xxxxx-xxxx" type="text" />
+						<input id="telCelular2" name="telCelular2"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencial" name="telResidencial" placeholder="(xx) xxxx-xxxx" type="text" />
-						<label>E-mail:</label>
+						<input id="telResidencial" name="telResidencial"
+							placeholder="(xx) xxxx-xxxx" type="text" />
+						<label>E-mail *:</label>
 						<input id="email" name="email" type="text" />
 						<legend>Saúde</legend>
 						<label>Alergias:</label>
@@ -55,24 +59,21 @@
 						<label>Medicamentos:</label>
 						<input id="medicamentos" name="medicamentos" type="text" />
 						<legend>Contato em caso de emergência</legend>
-						<label>Nome:</label>
+						<label>Nome *:</label>
 						<input id="nomeContato" name="nomeContato" type="text" />
-						<label>Celular 1:</label>
-						<input id="telCelular1Contato" name="telCelular1Contato" placeholder="(xx) xxxxx-xxxx" 
-							type="text" />
+						<label>Celular 1 *:</label>
+						<input id="telCelular1Contato" name="telCelular1Contato"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Celular 2:</label>
-						<input id="telCelular2Contato" name="telCelular2Contato" placeholder="(xx) xxxxx-xxxx" 
-							type="text" />
+						<input id="telCelular2Contato" name="telCelular2Contato"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencialContato" name="telResidencialContato" placeholder="(xx) xxxx-xxxx" 
-							type="text" />
+						<input id="telResidencialContato" name="telResidencialContato"
+							placeholder="(xx) xxxx-xxxx" type="text" />
 						<label>Telefone comercial:</label>
-						<input id="telComercialContato" name="telComercialContato" placeholder="(xx) xxxx-xxxx" 
-							type="text" />
-						<legend>Termo de Compromisso</legend>
-						<label><a class="fancybox-media fancybox.iframe" href="/termoCompromisso">Ler contrato</a></label>
-						<label>Você concorda com todos os termos citados no contrato?</label>
-						<input id="termoCompromisso" name="termoCompromisso" type="checkbox" value="S">Li e concordo com todos os termos do Contrato.<br>
+						<input id="telComercialContato" name="telComercialContato"
+							placeholder="(xx) xxxx-xxxx" type="text" />
+						<br/>
 						<br/>
 						<button name="send" type="submit" class="button">Enviar</button>
 					</fieldset>
