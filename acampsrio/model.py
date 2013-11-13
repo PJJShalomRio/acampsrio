@@ -30,7 +30,7 @@ class Participante(db.Model):
     nomeContato = db.StringProperty()
     telCelular1Contato = db.StringProperty()
     telCelular2Contato = db.StringProperty()
-    telResidenciaContato = db.StringProperty()
+    telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
     ficouSabendo = db.StringListProperty()
@@ -62,7 +62,7 @@ class Servico(db.Model):
     nomeContato = db.StringProperty()
     telCelular1Contato = db.StringProperty()
     telCelular2Contato = db.StringProperty()
-    telResidenciaContato = db.StringProperty()
+    telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
     
     termoCompromisso = db.StringProperty()

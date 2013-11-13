@@ -85,7 +85,7 @@ class InscricaoServicoHandler(RequestHandler):
             servico.nomeContato = self.request.get('nomeContato')
             servico.telCelular1Contato = self.request.get('telCelular1Contato')
             servico.telCelular2Contato = self.request.get('telCelular2Contato')
-            servico.telResidenciaContato = self.request.get('telResidenciaContato')
+            servico.telResidencialContato = self.request.get('telResidencialContato')
             servico.telComercialContato = self.request.get('telComercialContato')
             
             servico.put() 
@@ -124,7 +124,7 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.nomeContato = self.request.get('nomeContato')
             participante.telCelular1Contato = self.request.get('telCelular1Contato')
             participante.telCelular2Contato = self.request.get('telCelular2Contato')
-            participante.telResidenciaContato = self.request.get('telResidenciaContato')
+            participante.telResidencialContato = self.request.get('telResidencialContato')
             participante.telComercialContato = self.request.get('telComercialContato')
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
