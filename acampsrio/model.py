@@ -35,8 +35,6 @@ class Participante(db.Model):
     
     ficouSabendo = db.StringListProperty()
     
-    termoCompromisso = db.StringProperty()
-    
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
     
 class Servico(db.Model):

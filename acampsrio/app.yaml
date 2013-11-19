@@ -16,5 +16,13 @@ handlers:
 - url: /font
   static_dir: font
 
+- url: /sitemap.xml
+  static_files: sitemap.xml
+  upload: sitemap.xml
+  
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+
 - url: /.*
   script: controller.application
