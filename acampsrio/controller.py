@@ -232,7 +232,7 @@ class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
             participantes = Participante.all()
             
             familias = list()
-            for x in ['Vermelha', 'Branca', 'Preta', 'Verde', 'Azul', 'Coral']:
+            for x in ['Vermelha', 'Branca', 'Preta', 'Verde', 'Azul', 'Coral', 'Amarela']:
                 familia = Familia()
                 familia.cor = x
                 familia.filhos = participantes
@@ -248,15 +248,31 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            participantes = Participante.all()
-            
             listaOnibus = list()
-            for x in [1, 2, 3, 4, 5, 6, 7]:
-                onibus = Onibus()
-                onibus.numero = x
-                onibus.pessoas = participantes
-                onibus.total = participantes.count()
-                listaOnibus.append(onibus)
+            listaPassageiro = list()
+            countPassageiro = 0
+            countOnibus = 1
+            for participante in Participante.all():
+                if countPassageiro < 46:
+                    listaPassageiro.append(participante)
+                    countPassageiro += 1
+                else:
+                    onibus = Onibus()
+                    onibus.numero = countOnibus
+                    onibus.pessoas = listaPassageiro
+                    onibus.total = listaPassageiro.__len__()
+                    listaOnibus.append(onibus)
+                    
+                    listaPassageiro = list() 
+                    listaPassageiro.append(participante)
+                    countPassageiro = 1
+                    countOnibus += 1
+                    
+            onibus = Onibus()
+            onibus.numero = countOnibus
+            onibus.pessoas = listaPassageiro
+            onibus.total = listaPassageiro.__len__()
+            listaOnibus.append(onibus)
             
             self.response.out.write(template.render('pages/reports/relacaoPessoasPorOnibus.html',
                                                     {'listaOnibus':listaOnibus}))
