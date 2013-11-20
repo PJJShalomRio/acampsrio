@@ -4,6 +4,10 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
+automatic_scaling:
+  max_idle_instances: 1
+  min_pending_latency: 3.0s
+
 default_expiration: "7d"
   
 handlers:

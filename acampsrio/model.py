@@ -32,7 +32,7 @@ class Participante(db.Model):
     telCelular2Contato = db.StringProperty()
     telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
-    
+    termoCompromisso = db.StringProperty()
     ficouSabendo = db.StringListProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
@@ -62,8 +62,6 @@ class Servico(db.Model):
     telCelular2Contato = db.StringProperty()
     telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
-    
-    termoCompromisso = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
 
