@@ -252,7 +252,7 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
             listaPassageiro = list()
             countPassageiro = 0
             countOnibus = 1
-            for participante in Participante.all():
+            for participante in Participante.all().order('nome'):
                 if countPassageiro < 46:
                     listaPassageiro.append(participante)
                     countPassageiro += 1

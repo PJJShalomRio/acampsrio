@@ -13,13 +13,13 @@
 				<form id="inscricaoParticipanteForm"
 					name="inscricaoParticipanteForm" action="/inscricaoParticipante"
 					method="post">
-					<p>Campos com * são obrigatórios</p>
+					<p align="justify">Campos com * são obrigatórios</p>
 					<fieldset>
 						<legend>Informações pessoais</legend>
 						<label>Nome *:</label>
 						<input id="nome" name="nome" type="text" />
 						<label>Data de nascimento *:</label>
-						<input id="dataNascimento" name="dataNascimento" type="text"  />
+						<input id="dataNascimento" name="dataNascimento" type="text" />
 						<label>Identidade *:</label>
 						<input id="identidade" name="identidade" type="text" />
 						<label>Sexo *:</label>
@@ -31,7 +31,7 @@
 							<input type="radio" name="sexo" id="sexoF" value="F">
 							Feminino
 						</label>
-						<br/>
+						<br />
 						<legend>Endereço</legend>
 						<label>Logradouro *:</label>
 						<input id="logradouro" name="logradouro" type="text" />
@@ -47,11 +47,14 @@
 						</select>
 						<legend>Contato</legend>
 						<label>Celular 1 *:</label>
-						<input id="telCelular1" name="telCelular1" placeholder="(xx) xxxxx-xxxx" type="text" />
+						<input id="telCelular1" name="telCelular1"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Celular 2:</label>
-						<input id="telCelular2" name="telCelular2" placeholder="(xx) xxxxx-xxxx" type="text" />
+						<input id="telCelular2" name="telCelular2"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencial" name="telResidencial" placeholder="(xx) xxxx-xxxx" type="text" />
+						<input id="telResidencial" name="telResidencial"
+							placeholder="(xx) xxxx-xxxx" type="text" />
 						<label>E-mail *:</label>
 						<input id="email" name="email" type="text" />
 						<legend>Saúde</legend>
@@ -63,32 +66,61 @@
 						<label>Nome *:</label>
 						<input id="nomeContato" name="nomeContato" type="text" />
 						<label>Celular 1 *:</label>
-						<input id="telCelular1Contato" name="telCelular1Contato" placeholder="(xx) xxxxx-xxxx" 
-							type="text" />
+						<input id="telCelular1Contato" name="telCelular1Contato"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Celular 2:</label>
-						<input id="telCelular2Contato" name="telCelular2Contato" placeholder="(xx) xxxxx-xxxx" 
-							type="text" />
+						<input id="telCelular2Contato" name="telCelular2Contato"
+							placeholder="(xx) xxxxx-xxxx" type="text" />
 						<label>Telefone residencial:</label>
-						<input id="telResidencialContato" name="telResidencialContato" placeholder="(xx) xxxx-xxxx" 
-							type="text" />
+						<input id="telResidencialContato" name="telResidencialContato"
+							placeholder="(xx) xxxx-xxxx" type="text" />
 						<label>Telefone comercial:</label>
-						<input id="telComercialContato" name="telComercialContato" placeholder="(xx) xxxx-xxxx" 
-							type="text" />
+						<input id="telComercialContato" name="telComercialContato"
+							placeholder="(xx) xxxx-xxxx" type="text" />
 						<legend>Como ficou sabendo do Acamp's?</legend>
-						<input name=ficouSabendo type="checkbox" value="Halleluya">No Halleluya<br/>
-						<input name=ficouSabendo type="checkbox" value="Radicalidade">Radicalidade<br/>
-						<input name=ficouSabendo type="checkbox" value="Shalom">Na Comunidade Católica Shalom<br/>
-						<input name=ficouSabendo type="checkbox" value="Amigos(as)">Por amigos(as)<br/>
-						<input name=ficouSabendo type="checkbox" value="Google">No Google<br/>
-						<input name=ficouSabendo type="checkbox" value="Facebook">No Facebook<br/>
-						<input name=ficouSabendo type="checkbox" value="Twitter">No Twitter<br/>
-						<br/>
+						<input name=ficouSabendo type="checkbox" value="Halleluya">
+						No Halleluya
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Radicalidade">
+						Radicalidade
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Shalom">
+						Na Comunidade Católica Shalom
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Amigos(as)">
+						Por amigos(as)
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Google">
+						No Google
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Facebook">
+						No Facebook
+						<br />
+						<input name=ficouSabendo type="checkbox" value="Twitter">
+						No Twitter
+						<br />
+						<br />
 						<legend>Termo de Compromisso</legend>
-						<label><a class="fancybox-media fancybox.iframe" href="/termoCompromisso">Ler contrato</a></label>
-						<label>Você concorda com todos os termos citados no contrato?</label>
-						<input id="termoCompromisso" name="termoCompromisso" type="checkbox" value="S">Li e concordo com todos os termos do Contrato. *
-						<br/>
-						<br/>
+						<label>
+							<a class="fancybox-media fancybox.iframe"
+								href="/termoCompromisso">Ler contrato</a>
+						</label>
+						<label>Você concorda com todos os termos citados no
+							contrato?</label>
+						<input id="termoCompromisso" name="termoCompromisso"
+							type="checkbox" value="S">
+						Li e concordo com todos os termos do Contrato. *
+						<br />
+						<br />
+						<p align="justify">O valor da inscrição do Acamp's Rio 2014 é
+							R$ 225,00. Este valor pode ser pago nas seguintes formas:</p>
+						<ul>
+							<li>Dinheiro/Cheque - Diretamente na Comunidade Católica
+								Shalom</li>
+							<li>Pagseguro em até 10 vezes no cartão (R$ 225,00 + R$
+								11,25 de taxa Pagseguro totalizando R$ 236,25)</li>
+						</ul>
+						<br />
 						<button name="send" type="submit" class="button">Enviar</button>
 					</fieldset>
 				</form>
