@@ -67,7 +67,7 @@ class InscricaoServicoHandler(RequestHandler):
     
         try:
             servico = Servico()
-            servico.nome = self.request.get('nome')
+            servico.nome = self.request.get('nome').strip().upper()
             servico.dataNascimento = self.request.get('dataNascimento')
             servico.sexo = self.request.get('sexo')
             servico.identidade = self.request.get('identidade')
@@ -106,7 +106,7 @@ class InscricaoParticipanteHandler(RequestHandler):
         
         try:
             participante = Participante()
-            participante.nome = self.request.get('nome')
+            participante.nome = self.request.get('nome').strip().upper()
             participante.dataNascimento = self.request.get('dataNascimento')
             participante.sexo = self.request.get('sexo')
             participante.identidade = self.request.get('identidade')
@@ -199,19 +199,19 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
             
             participantesPorBairro = dict()
             for participante in Participante.all().filter('cidade = ', 'Rio de Janeiro').order('bairro'):
-                qtde = participantesPorBairro.get(participante.bairro.strip().upper())
+                qtde = participantesPorBairro.get(participante.bairro)
                 if qtde:
-                    participantesPorBairro[participante.bairro.strip().upper()] = qtde + 1
+                    participantesPorBairro[participante.bairro] = qtde + 1
                 else:
-                    participantesPorBairro[participante.bairro.strip().upper()] = 1
+                    participantesPorBairro[participante.bairro] = 1
             
             participantesPorOutrasCidades = dict()
             for participante in Participante.all().filter('cidade != ', 'Rio de Janeiro'):
-                qtde = participantesPorOutrasCidades.get(participante.cidade.strip().upper()+'/'+participante.bairro.strip().upper())
+                qtde = participantesPorOutrasCidades.get(participante.cidade+'/'+participante.bairro)
                 if qtde:
-                    participantesPorOutrasCidades[participante.cidade.strip().upper()+'/'+participante.bairro.strip().upper()] = qtde + 1
+                    participantesPorOutrasCidades[participante.cidade+'/'+participante.bairro] = qtde + 1
                 else:
-                    participantesPorOutrasCidades[participante.cidade.strip().upper()+'/'+participante.bairro.strip().upper()] = 1
+                    participantesPorOutrasCidades[participante.cidade+'/'+participante.bairro] = 1
                     
             participantesPorIdade = dict()
             for participante in Participante.all():
