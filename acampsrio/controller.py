@@ -198,7 +198,7 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
             totalMasculino = totalParticipantes - totalFeminino
             
             participantesPorBairro = dict()
-            for participante in Participante.all().filter('cidade = ', 'Rio de Janeiro').order('bairro'):
+            for participante in Participante.all().filter('cidade = ', 'RIO DE JANEIRO').order('bairro'):
                 qtde = participantesPorBairro.get(participante.bairro)
                 if qtde:
                     participantesPorBairro[participante.bairro] = qtde + 1
@@ -206,7 +206,7 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                     participantesPorBairro[participante.bairro] = 1
             
             participantesPorOutrasCidades = dict()
-            for participante in Participante.all().filter('cidade != ', 'Rio de Janeiro'):
+            for participante in Participante.all().filter('cidade != ', 'RIO DE JANEIRO'):
                 qtde = participantesPorOutrasCidades.get(participante.cidade+'/'+participante.bairro)
                 if qtde:
                     participantesPorOutrasCidades[participante.cidade+'/'+participante.bairro] = qtde + 1
