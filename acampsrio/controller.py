@@ -292,6 +292,7 @@ application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
                                       ('/inscricaoServico', InscricaoServicoHandler),
+                                      ('/inscricaoservico', InscricaoServicoHandler),
                                       ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/login', LoginHandler),
                                       ('/logout', LogoutHandler),
