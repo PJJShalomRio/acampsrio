@@ -4,6 +4,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model import Participante, Servico, Contato, Familia, Onibus
+import csv
 
 
 class HomeHandler(RequestHandler):
@@ -207,11 +208,11 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
             
             participantesPorOutrasCidades = dict()
             for participante in Participante.all().filter('cidade != ', 'RIO DE JANEIRO'):
-                qtde = participantesPorOutrasCidades.get(participante.cidade+'/'+participante.bairro)
+                qtde = participantesPorOutrasCidades.get(participante.cidade + '/' + participante.bairro)
                 if qtde:
-                    participantesPorOutrasCidades[participante.cidade+'/'+participante.bairro] = qtde + 1
+                    participantesPorOutrasCidades[participante.cidade + '/' + participante.bairro] = qtde + 1
                 else:
-                    participantesPorOutrasCidades[participante.cidade+'/'+participante.bairro] = 1
+                    participantesPorOutrasCidades[participante.cidade + '/' + participante.bairro] = 1
                     
             participantesPorIdade = dict()
             for participante in Participante.all():
@@ -288,6 +289,43 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
         else:
             self.response.out.write(template.render('pages/index.html', {}))
 
+class ExportarParticipantesHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            self.response.headers['Content-Type'] = 'application/csv'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=participantes.csv'
+            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade",
+                             "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
+                             "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
+                             "Alergias", "Medicamentos",
+                             "Nome do Contato",
+                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
+            
+            for participante in Participante.all().order('nome'):
+                writer.writerow([participante.nome,
+                                 participante.dataNascimento,
+                                 participante.sexo,
+                                 participante.identidade,
+                                 participante.logradouro,
+                                 participante.complemento,
+                                 participante.cidade,
+                                 participante.uf,
+                                 participante.bairro,
+                                 participante.telCelular1,
+                                 participante.telCelular2,
+                                 participante.telResidencial,
+                                 participante.email,
+                                 participante.alergias,
+                                 participante.medicamentos,
+                                 participante.nomeContato,
+                                 participante.telCelular1Contato,
+                                 participante.telCelular2Contato,
+                                 participante.telResidencialContato,
+                                 participante.telComercialContato])
+        
+
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
@@ -297,6 +335,8 @@ application = webapp.WSGIApplication(
                                       ('/login', LoginHandler),
                                       ('/logout', LogoutHandler),
                                       ('/contato', ContatoHandler),
+                                      ('/exportarParticipante', ExportarParticipantesHandler),
+                                      ('/exportarServico', ExportarParticipantesHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
