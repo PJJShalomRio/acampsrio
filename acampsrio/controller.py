@@ -5,6 +5,7 @@ from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model import Participante, Servico, Contato, Familia, Onibus
 import csv
+from google.appengine._internal.django.utils.encoding import smart_str
 
 
 class HomeHandler(RequestHandler):
@@ -304,26 +305,26 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
             
             for participante in Participante.all().order('nome'):
-                writer.writerow([participante.nome,
-                                 participante.dataNascimento,
-                                 participante.sexo,
-                                 participante.identidade,
-                                 participante.logradouro,
-                                 participante.complemento,
-                                 participante.cidade,
-                                 participante.uf,
-                                 participante.bairro,
-                                 participante.telCelular1,
-                                 participante.telCelular2,
-                                 participante.telResidencial,
-                                 participante.email,
-                                 participante.alergias,
-                                 participante.medicamentos,
-                                 participante.nomeContato,
-                                 participante.telCelular1Contato,
-                                 participante.telCelular2Contato,
-                                 participante.telResidencialContato,
-                                 participante.telComercialContato])
+                writer.writerow([smart_str(participante.nome),
+                                 smart_str(participante.dataNascimento),
+                                 smart_str(participante.sexo),
+                                 smart_str(participante.identidade),
+                                 smart_str(participante.logradouro),
+                                 smart_str(participante.complemento),
+                                 smart_str(participante.cidade),
+                                 smart_str(participante.uf),
+                                 smart_str(participante.bairro),
+                                 smart_str(participante.telCelular1),
+                                 smart_str(participante.telCelular2),
+                                 smart_str(participante.telResidencial),
+                                 smart_str(participante.email),
+                                 smart_str(participante.alergias),
+                                 smart_str(participante.medicamentos),
+                                 smart_str(participante.nomeContato),
+                                 smart_str(participante.telCelular1Contato),
+                                 smart_str(participante.telCelular2Contato),
+                                 smart_str(participante.telResidencialContato),
+                                 smart_str(participante.telComercialContato)])
         
 
 application = webapp.WSGIApplication(
