@@ -305,27 +305,62 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
             
             for participante in Participante.all().order('nome'):
-                writer.writerow([smart_str(participante.nome),
-                                 smart_str(participante.dataNascimento),
-                                 smart_str(participante.sexo),
-                                 smart_str(participante.identidade),
-                                 smart_str(participante.logradouro),
-                                 smart_str(participante.complemento),
-                                 smart_str(participante.cidade),
-                                 smart_str(participante.uf),
-                                 smart_str(participante.bairro),
-                                 smart_str(participante.telCelular1),
-                                 smart_str(participante.telCelular2),
-                                 smart_str(participante.telResidencial),
-                                 smart_str(participante.email),
-                                 smart_str(participante.alergias),
-                                 smart_str(participante.medicamentos),
-                                 smart_str(participante.nomeContato),
-                                 smart_str(participante.telCelular1Contato),
-                                 smart_str(participante.telCelular2Contato),
-                                 smart_str(participante.telResidencialContato),
-                                 smart_str(participante.telComercialContato)])
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.sexo, encoding='ISO-8859-1'),
+                                 smart_str(participante.identidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.logradouro, encoding='ISO-8859-1'),
+                                 smart_str(participante.complemento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.uf, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1'),
+                                 smart_str(participante.telCelular1, encoding='ISO-8859-1'),
+                                 smart_str(participante.telCelular2, encoding='ISO-8859-1'),
+                                 smart_str(participante.telResidencial, encoding='ISO-8859-1'),
+                                 smart_str(participante.email, encoding='ISO-8859-1'),
+                                 smart_str(participante.alergias, encoding='ISO-8859-1'),
+                                 smart_str(participante.medicamentos, encoding='ISO-8859-1'),
+                                 smart_str(participante.nomeContato, encoding='ISO-8859-1'),
+                                 smart_str(participante.telCelular1Contato, encoding='ISO-8859-1'),
+                                 smart_str(participante.telCelular2Contato, encoding='ISO-8859-1'),
+                                 smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
+                                 smart_str(participante.telComercialContato, encoding='ISO-8859-1')])
         
+class ExportarServicoHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            self.response.headers['Content-Type'] = 'application/csv'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=servos.csv'
+            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade",
+                             "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
+                             "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
+                             "Alergias", "Medicamentos",
+                             "Nome do Contato",
+                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
+            
+            for servico in Servico.all().order('nome'):
+                writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
+                                 smart_str(servico.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(servico.sexo, encoding='ISO-8859-1'),
+                                 smart_str(servico.identidade, encoding='ISO-8859-1'),
+                                 smart_str(servico.logradouro, encoding='ISO-8859-1'),
+                                 smart_str(servico.complemento, encoding='ISO-8859-1'),
+                                 smart_str(servico.cidade, encoding='ISO-8859-1'),
+                                 smart_str(servico.uf, encoding='ISO-8859-1'),
+                                 smart_str(servico.bairro, encoding='ISO-8859-1'),
+                                 smart_str(servico.telCelular1, encoding='ISO-8859-1'),
+                                 smart_str(servico.telCelular2, encoding='ISO-8859-1'),
+                                 smart_str(servico.telResidencial, encoding='ISO-8859-1'),
+                                 smart_str(servico.email, encoding='ISO-8859-1'),
+                                 smart_str(servico.alergias, encoding='ISO-8859-1'),
+                                 smart_str(servico.medicamentos, encoding='ISO-8859-1'),
+                                 smart_str(servico.nomeContato, encoding='ISO-8859-1'),
+                                 smart_str(servico.telCelular1Contato, encoding='ISO-8859-1'),
+                                 smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),
+                                 smart_str(servico.telResidencialContato, encoding='ISO-8859-1'),
+                                 smart_str(servico.telComercialContato, encoding='ISO-8859-1')])
 
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
@@ -337,7 +372,7 @@ application = webapp.WSGIApplication(
                                       ('/logout', LogoutHandler),
                                       ('/contato', ContatoHandler),
                                       ('/exportarParticipante', ExportarParticipantesHandler),
-                                      ('/exportarServico', ExportarParticipantesHandler),
+                                      ('/exportarServico', ExportarServicoHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
