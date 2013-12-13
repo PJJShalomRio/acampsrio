@@ -333,7 +333,7 @@ class ExportarServicoHandler(RequestHandler):
             self.response.headers['Content-Type'] = 'application/csv'
             self.response.headers['Content-Disposition'] = 'attachment; filename=servos.csv'
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade",
+            writer.writerow(["Nome", "Data de Nascimento", "Sexo",
                              "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
                              "Alergias", "Medicamentos",
@@ -344,7 +344,6 @@ class ExportarServicoHandler(RequestHandler):
                 writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
                                  smart_str(servico.dataNascimento, encoding='ISO-8859-1'),
                                  smart_str(servico.sexo, encoding='ISO-8859-1'),
-                                 smart_str(servico.identidade, encoding='ISO-8859-1'),
                                  smart_str(servico.logradouro, encoding='ISO-8859-1'),
                                  smart_str(servico.complemento, encoding='ISO-8859-1'),
                                  smart_str(servico.cidade, encoding='ISO-8859-1'),
