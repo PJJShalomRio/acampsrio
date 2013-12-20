@@ -18,6 +18,7 @@
 <path>${GOOGLE_APP_ENGINE}/lib/django-1.3</path>
 <path>${GOOGLE_APP_ENGINE}/lib/django-1.4</path>
 <path>${GOOGLE_APP_ENGINE}/lib/django-1.5</path>
+<path>${GOOGLE_APP_ENGINE}/lib/endpoints-1.0</path>
 <path>${GOOGLE_APP_ENGINE}/lib/enum</path>
 <path>${GOOGLE_APP_ENGINE}/lib/fancy_urllib</path>
 <path>${GOOGLE_APP_ENGINE}/lib/google-api-python-client</path>
@@ -29,6 +30,7 @@
 <path>${GOOGLE_APP_ENGINE}/lib/markupsafe-0.15</path>
 <path>${GOOGLE_APP_ENGINE}/lib/oauth2</path>
 <path>${GOOGLE_APP_ENGINE}/lib/prettytable</path>
+<path>${GOOGLE_APP_ENGINE}/lib/protorpc-1.0</path>
 <path>${GOOGLE_APP_ENGINE}/lib/python-gflags/tests</path>
 <path>${GOOGLE_APP_ENGINE}/lib/setuptools-0.6c11</path>
 <path>${GOOGLE_APP_ENGINE}/lib/simplejson</path>
