@@ -94,6 +94,8 @@ class InscricaoServicoHandler(RequestHandler):
             servico.telResidencialContato = self.request.get('telResidencialContato')
             servico.telComercialContato = self.request.get('telComercialContato')
             
+            servico.pagouInscricao = 'N'
+            
             servico.put() 
         except Exception, e:
             self.response.out.write(template.render('pages/errointerno.html', {}))
@@ -134,6 +136,9 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.telComercialContato = self.request.get('telComercialContato')
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
+
+            participante.pagouInscricao = 'N'
+            participante.familia = 'BRANCA'
             
             participante.put()
         except Exception, e:
@@ -264,7 +269,7 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
             countPassageiro = 0
             countOnibus = 1
             for participante in Participante.all().order('nome'):
-                if countPassageiro < 46:
+                if countPassageiro < 44:
                     listaPassageiro.append(participante)
                     countPassageiro += 1
                 else:
@@ -360,6 +365,22 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(servico.telComercialContato, encoding='ISO-8859-1')])
+
+class AtualizarHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            for participante in Participante.all():
+                participante.familia = 'BRANCA'
+                participante.pagouInscricao = 'N'
+                participante.termoCompromisso = 'S'
+                participante.put()
+                
+            for servico in Servico.all():
+                servico.pagouInscricao = 'N'
+                servico.put()
+
+        self.response.out.write(template.render('pages/index.html', {}))
 
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),

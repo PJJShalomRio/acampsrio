@@ -1,8 +1,6 @@
 """
 @author: matheus cardoso
  
-
-
 Copyright (C) 2013 MVM Tecnologia
 """
 
@@ -37,6 +35,9 @@ class Participante(db.Model):
     termoCompromisso = db.StringProperty()
     ficouSabendo = db.StringListProperty()
     
+    familia = db.StringProperty()
+    pagouInscricao = db.StringProperty()
+    
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
     
 class Servico(db.Model):
@@ -64,6 +65,8 @@ class Servico(db.Model):
     telCelular2Contato = db.StringProperty()
     telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
+    
+    pagouInscricao = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
 
