@@ -307,7 +307,8 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
                              "Alergias", "Medicamentos",
                              "Nome do Contato",
-                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
+                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
+                             "Familia", "Pagou a Inscricao"])
             
             for participante in Participante.all().order('nome'):
                 writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
@@ -329,7 +330,10 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telCelular1Contato, encoding='ISO-8859-1'),
                                  smart_str(participante.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
-                                 smart_str(participante.telComercialContato, encoding='ISO-8859-1')])
+                                 smart_str(participante.telComercialContato, encoding='ISO-8859-1'),
+                                 smart_str(participante.familia, encoding='ISO-8859-1'),
+                                 smart_str(participante.pagouInscricao, encoding='ISO-8859-1')
+                                 ])
         
 class ExportarServicoHandler(RequestHandler):
     def get(self):
@@ -343,7 +347,8 @@ class ExportarServicoHandler(RequestHandler):
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
                              "Alergias", "Medicamentos",
                              "Nome do Contato",
-                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato"])
+                             "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
+                             "Pagou a Inscricao"])
             
             for servico in Servico.all().order('nome'):
                 writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
@@ -364,7 +369,9 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular1Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencialContato, encoding='ISO-8859-1'),
-                                 smart_str(servico.telComercialContato, encoding='ISO-8859-1')])
+                                 smart_str(servico.telComercialContato, encoding='ISO-8859-1'),
+                                 smart_str(servico.pagouInscricao, encoding='ISO-8859-1')
+                                 ])
 
 class AtualizarHandler(RequestHandler):
     def get(self):
