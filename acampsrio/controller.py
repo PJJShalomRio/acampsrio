@@ -6,6 +6,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from model import Participante, Servico, Contato, Familia, Onibus
 import csv
 from google.appengine._internal.django.utils.encoding import smart_str
+import collections
 
 
 class HomeHandler(RequestHandler):
@@ -211,6 +212,7 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                     participantesPorBairro[participante.bairro] = qtde + 1
                 else:
                     participantesPorBairro[participante.bairro] = 1
+            participantesPorBairro = collections.OrderedDict(sorted(participantesPorBairro.items()))
             
             participantesPorOutrasCidades = dict()
             for participante in Participante.all().filter('cidade != ', 'RIO DE JANEIRO'):
@@ -219,6 +221,7 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                     participantesPorOutrasCidades[participante.cidade + '/' + participante.bairro] = qtde + 1
                 else:
                     participantesPorOutrasCidades[participante.cidade + '/' + participante.bairro] = 1
+            participantesPorOutrasCidades = collections.OrderedDict(sorted(participantesPorOutrasCidades.items()))
                     
             participantesPorIdade = dict()
             for participante in Participante.all():
@@ -229,6 +232,7 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                     participantesPorIdade[idade] = qtde + 1
                 else:
                     participantesPorIdade[idade] = 1
+            participantesPorIdade = collections.OrderedDict(sorted(participantesPorIdade.items()))
             
             self.response.out.write(template.render('pages/reports/relacaoEstatisticaParticipantesInscritos.html',
                                                     {'totalParticipantes':totalParticipantes,
