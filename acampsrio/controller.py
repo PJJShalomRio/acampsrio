@@ -205,6 +205,9 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
             totalFeminino = Participante.all().filter('sexo = ', 'F').count()
             totalMasculino = totalParticipantes - totalFeminino
             
+            totalPaticipantesPagouInscricao = Participante.all().filter('pagouInscricao = ', 'S').count()
+            totalPaticipantesNaoPagouInscricao = totalParticipantes - totalPaticipantesPagouInscricao
+            
             participantesPorBairro = dict()
             for participante in Participante.all().filter('cidade = ', 'RIO DE JANEIRO').order('bairro'):
                 qtde = participantesPorBairro.get(participante.bairro)
@@ -240,7 +243,9 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                                                      'totalMasculino':totalMasculino,
                                                      'participantesPorBairro':participantesPorBairro,
                                                      'participantesPorOutrasCidades':participantesPorOutrasCidades,
-                                                     'participantesPorIdade':participantesPorIdade
+                                                     'participantesPorIdade':participantesPorIdade,
+                                                     'totalPaticipantesPagouInscricao':totalPaticipantesPagouInscricao,
+                                                     'totalPaticipantesNaoPagouInscricao':totalPaticipantesNaoPagouInscricao
                                                      }))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
