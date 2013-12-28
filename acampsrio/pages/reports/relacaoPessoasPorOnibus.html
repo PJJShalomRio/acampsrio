@@ -26,17 +26,20 @@
 				<tr>
 					<th>Nome</th>
 					<th>Data de Nascimento</th>
+					<th>Identidade</th>
 					<th>Tel Celular1</th>
 				</tr>
 				{% for item in onibus.pessoas %}
 				<tr>
 					<td>{{ item.nome }}</td>
 					<td>{{ item.dataNascimento }}</td>
+					<td>{{ item.identidade }}</td>
 					<td>{{ item.telCelular1	 }}</td>
 				</tr>
 				{% endfor %}
 				<tr>
 					<th>TOTAL</th>
+					<th></th>
 					<th></th>
 					<th>{{ onibus.total }}</th>
 				</tr>

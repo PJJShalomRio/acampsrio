@@ -427,13 +427,99 @@ class ExportarOnibusHandler(RequestHandler):
                 writer.writerow([smart_str("Onibus: " + str(onibus.numero), encoding='ISO-8859-1')])
                 writer.writerow([smart_str("Responsavel 1:", encoding='ISO-8859-1')])
                 writer.writerow([smart_str("Responsavel 2:", encoding='ISO-8859-1')])
-                writer.writerow(["Nome", "Data de Nascimento", "Tel Celular1"])
+                writer.writerow(["Nome", "Data de Nascimento", "Identidade", "Tel Celular1"])
                 for pessoa in onibus.pessoas:
                     writer.writerow([smart_str(pessoa.nome, encoding='ISO-8859-1'),
                                      smart_str(pessoa.dataNascimento, encoding='ISO-8859-1'),
+                                     smart_str(pessoa.identidade, encoding='ISO-8859-1'),
                                      smart_str(pessoa.telCelular1, encoding='ISO-8859-1')
                                      ])
                 writer.writerow([""])
+
+class ExportarFamiliaHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            self.response.headers['Content-Type'] = 'application/csv'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=familias.csv'
+            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            
+            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA')
+            writer.writerow([smart_str("Familia BRANCA", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaBranca:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA')
+            writer.writerow([smart_str("Familia VERMELHA", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaVermeha:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA')
+            writer.writerow([smart_str("Familia AMARELA", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaAmarela:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE')
+            writer.writerow([smart_str("Familia VERDE", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaVerde:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL')
+            writer.writerow([smart_str("Familia AZUL", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaAzul:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL')
+            writer.writerow([smart_str("Familia CORAL", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaCoral:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
+            
+            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA')
+            writer.writerow([smart_str("Familia PRETA", encoding='ISO-8859-1')])
+            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
+            for participante in familiaPreta:
+                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
+                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
+                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.bairro, encoding='ISO-8859-1')
+                                 ])
+            writer.writerow([""])
 
 class AtualizarHandler(RequestHandler):
     def get(self):
@@ -470,6 +556,7 @@ application = webapp.WSGIApplication(
                                       ('/exportarParticipante', ExportarParticipantesHandler),
                                       ('/exportarServico', ExportarServicoHandler),
                                       ('/exportarOnibus', ExportarOnibusHandler),
+                                      ('/exportarFamilia', ExportarFamiliaHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
