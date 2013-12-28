@@ -23,16 +23,19 @@
 					<th>Nome</th>
 					<th>Email</th>
 					<th>Celular</th>
+					<th>Pagou a inscrição?</th>
 				</tr>
 				{% for item in listaItens %}
 				<tr>
 					<td>{{ item.nome }}</td>
 					<td>{{ item.email }}</td>
 					<td>{{ item.telCelular1 }}</td>
+					<td>{{ item.pagouInscricao }}</td>
 				</tr>
 				{% endfor %}
 				<tr>
 					<th>TOTAL</th>
+					<th></th>
 					<th></th>
 					<th>{{ total }}</th>
 				</tr>
