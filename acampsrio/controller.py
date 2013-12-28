@@ -4,9 +4,10 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from model import Participante, Servico, Contato, Familia, Onibus
+from model import Participante, Servico, Contato, Onibus
 import collections
 import csv
+from random import randint
 
 
 class HomeHandler(RequestHandler):
@@ -254,18 +255,23 @@ class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            participantes = Participante.all()
             
-            familias = list()
-            for x in ['Vermelha', 'Branca', 'Preta', 'Verde', 'Azul', 'Coral', 'Amarela']:
-                familia = Familia()
-                familia.cor = x
-                familia.filhos = participantes
-                familia.total = participantes.count()
-                familias.append(familia)
+            familiaBranca = Participante.all().filter('familia = ', 'BRANCA')
+            familiaVermeha = Participante.all().filter('familia = ', 'VERMELHA')
+            familiaAmarela = Participante.all().filter('familia = ', 'AMARELA')
+            familiaVerde = Participante.all().filter('familia = ', 'VERDE')
+            familiaAzul = Participante.all().filter('familia = ', 'AZUL')
+            familiaCoral = Participante.all().filter('familia = ', 'CORAL')
+            familiaPreta = Participante.all().filter('familia = ', 'PRETA')
             
             self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html',
-                                                    {'familias':familias}))
+                                                    {'familiaBranca':familiaBranca,
+                                                    'familiaVermeha':familiaVermeha,
+                                                    'familiaAmarela':familiaAmarela,
+                                                    'familiaVerde':familiaVerde,
+                                                    'familiaAzul':familiaAzul,
+                                                    'familiaCoral':familiaCoral,
+                                                    'familiaPreta':familiaPreta}))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
@@ -434,13 +440,21 @@ class AtualizarHandler(RequestHandler):
         if user and users.is_current_user_admin():
             for participante in Participante.all():
                 participante.familia = 'BRANCA'
-                participante.pagouInscricao = 'N'
-                participante.termoCompromisso = 'S'
                 participante.put()
                 
-            for servico in Servico.all():
-                servico.pagouInscricao = 'N'
-                servico.put()
+        self.response.out.write(template.render('pages/index.html', {}))
+
+class SortearFamiliasHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            
+            listaFamilia = ['BRANCA', 'VERMELHA', 'AMARELA', 'VERDE', 'AZUL', 'CORAL', 'PRETA']
+            numFamilia = randint(0, 6)
+
+            for participante in Participante.all():
+                participante.familia = listaFamilia[numFamilia]
+                participante.put()
 
         self.response.out.write(template.render('pages/index.html', {}))
 
@@ -457,6 +471,8 @@ application = webapp.WSGIApplication(
                                       ('/exportarServico', ExportarServicoHandler),
                                       ('/exportarOnibus', ExportarOnibusHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
+                                      ('/sortearFamilias', SortearFamiliasHandler),
+                                      ('/atualizarFamilias', AtualizarHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),

@@ -14,15 +14,14 @@
 			<img src="img/icons/icon-printer.png">
 		</a>
 
-		{% for familia in familias %}
-		<h3 align="center">Família {{ familia.cor }}</h3>
+		<h3 align="center">Família BRANCA</h3>
 		<div class="tabela">
 			<table>
 				<tr>
 					<th>Nome</th>
 					<th>Data de Nascimento</th>
 				</tr>
-				{% for item in familia.filhos %}
+				{% for item in familiaBranca %}
 				<tr>
 					<td>{{ item.nome }}</td>
 					<td>{{ item.dataNascimento }}</td>
@@ -30,12 +29,130 @@
 				{% endfor %}
 				<tr>
 					<th>TOTAL</th>
-					<th>{{ familia.total }}</th>
+					<th>{{ familiaBranca.count }}</th>
 				</tr>
 			</table>
 		</div>
 		<br>
-		{% endfor %}
+		<h3 align="center">Família VERMELHA</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaVermeha %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaVermeha.count }}</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<h3 align="center">Família AMARELA</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaAmarela %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaAmarela.count }}</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<h3 align="center">Família VERDE</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaVerde %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaVerde.count }}</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<h3 align="center">Família AZUL</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaAzul %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaAzul.count }}</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<h3 align="center">Família CORAL</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaCoral %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaCoral.count }}</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<h3 align="center">Família PRETA</h3>
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Data de Nascimento</th>
+				</tr>
+				{% for item in familiaPreta %}
+				<tr>
+					<td>{{ item.nome }}</td>
+					<td>{{ item.dataNascimento }}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<th>TOTAL</th>
+					<th>{{ familiaPreta.count }}</th>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 </html>
