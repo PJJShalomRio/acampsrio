@@ -1,12 +1,12 @@
 from datetime import date
+from google.appengine._internal.django.utils.encoding import smart_str
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from model import Participante, Servico, Contato, Familia, Onibus
-import csv
-from google.appengine._internal.django.utils.encoding import smart_str
 import collections
+import csv
 
 
 class HomeHandler(RequestHandler):
@@ -272,7 +272,7 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
             listaPassageiro = list()
             countPassageiro = 0
             countOnibus = 1
-            for participante in Participante.all().order('nome'):
+            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S'):
                 if countPassageiro < 44:
                     listaPassageiro.append(participante)
                     countPassageiro += 1
@@ -389,7 +389,7 @@ class ExportarOnibusHandler(RequestHandler):
             listaPassageiro = list()
             countPassageiro = 0
             countOnibus = 1
-            for participante in Participante.all().order('nome'):
+            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S'):
                 if countPassageiro < 44:
                     listaPassageiro.append(participante)
                     countPassageiro += 1
@@ -412,9 +412,9 @@ class ExportarOnibusHandler(RequestHandler):
             listaOnibus.append(onibus)
             
             for onibus in listaOnibus:
-                writer.writerow([smart_str("Ônibus: " + str(onibus.numero), encoding='ISO-8859-1')])
-                writer.writerow([smart_str("Responsável 1:", encoding='ISO-8859-1')])
-                writer.writerow([smart_str("Responsável 2:", encoding='ISO-8859-1')])
+                writer.writerow([smart_str("Onibus: " + str(onibus.numero), encoding='ISO-8859-1')])
+                writer.writerow([smart_str("Responsavel 1:", encoding='ISO-8859-1')])
+                writer.writerow([smart_str("Responsavel 2:", encoding='ISO-8859-1')])
                 writer.writerow(["Nome", "Data de Nascimento", "Tel Celular1"])
                 for pessoa in onibus.pessoas:
                     writer.writerow([smart_str(pessoa.nome, encoding='ISO-8859-1'),

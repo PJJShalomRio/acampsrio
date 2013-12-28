@@ -14,3 +14,8 @@ indexes:
   properties:
   - name: cidade
   - name: bairro
+
+- kind: Participante
+  properties:
+  - name: pagouInscricao
+  - name: nome
