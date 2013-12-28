@@ -109,6 +109,7 @@ class InscricaoParticipanteHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/inscricaoParticipante.html', {}))
     def post(self):
+        listaFamilia = ['BRANCA', 'VERMELHA', 'AMARELA', 'VERDE', 'AZUL', 'CORAL', 'PRETA']
         
         try:
             participante = Participante()
@@ -140,7 +141,7 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
 
             participante.pagouInscricao = 'N'
-            participante.familia = 'BRANCA'
+            participante.familia = listaFamilia[randint(0, 6)]
             
             participante.put()
         except Exception, e:
@@ -256,13 +257,13 @@ class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             
-            familiaBranca = Participante.all().filter('familia = ', 'BRANCA')
-            familiaVermeha = Participante.all().filter('familia = ', 'VERMELHA')
-            familiaAmarela = Participante.all().filter('familia = ', 'AMARELA')
-            familiaVerde = Participante.all().filter('familia = ', 'VERDE')
-            familiaAzul = Participante.all().filter('familia = ', 'AZUL')
-            familiaCoral = Participante.all().filter('familia = ', 'CORAL')
-            familiaPreta = Participante.all().filter('familia = ', 'PRETA')
+            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA')
+            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA')
+            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA')
+            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE')
+            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL')
+            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL')
+            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA')
             
             self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html',
                                                     {'familiaBranca':familiaBranca,
@@ -450,10 +451,9 @@ class SortearFamiliasHandler(RequestHandler):
         if user and users.is_current_user_admin():
             
             listaFamilia = ['BRANCA', 'VERMELHA', 'AMARELA', 'VERDE', 'AZUL', 'CORAL', 'PRETA']
-            numFamilia = randint(0, 6)
 
             for participante in Participante.all():
-                participante.familia = listaFamilia[numFamilia]
+                participante.familia = listaFamilia[randint(0, 6)]
                 participante.put()
 
         self.response.out.write(template.render('pages/index.html', {}))
@@ -471,8 +471,6 @@ application = webapp.WSGIApplication(
                                       ('/exportarServico', ExportarServicoHandler),
                                       ('/exportarOnibus', ExportarOnibusHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
-                                      ('/sortearFamilias', SortearFamiliasHandler),
-                                      ('/atualizarFamilias', AtualizarHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
