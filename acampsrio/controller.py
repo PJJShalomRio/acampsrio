@@ -189,7 +189,7 @@ class RelacaoCrachasParticipantesHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Participante.all()
+            results = Participante.all().order('nome')
             
             self.response.out.write(template.render('pages/reports/relacaoCrachasParticipantes.html',
                                                     {'listaItens':results}))
@@ -376,6 +376,52 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telComercialContato, encoding='ISO-8859-1'),
                                  smart_str(servico.pagouInscricao, encoding='ISO-8859-1')
                                  ])
+                
+class ExportarOnibusHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            self.response.headers['Content-Type'] = 'application/csv'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=onibus.csv'
+            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            
+            listaOnibus = list()
+            listaPassageiro = list()
+            countPassageiro = 0
+            countOnibus = 1
+            for participante in Participante.all().order('nome'):
+                if countPassageiro < 44:
+                    listaPassageiro.append(participante)
+                    countPassageiro += 1
+                else:
+                    onibus = Onibus()
+                    onibus.numero = countOnibus
+                    onibus.pessoas = listaPassageiro
+                    onibus.total = listaPassageiro.__len__()
+                    listaOnibus.append(onibus)
+                    
+                    listaPassageiro = list() 
+                    listaPassageiro.append(participante)
+                    countPassageiro = 1
+                    countOnibus += 1
+                    
+            onibus = Onibus()
+            onibus.numero = countOnibus
+            onibus.pessoas = listaPassageiro
+            onibus.total = listaPassageiro.__len__()
+            listaOnibus.append(onibus)
+            
+            for onibus in listaOnibus:
+                writer.writerow([smart_str("Ônibus: " + str(onibus.numero), encoding='ISO-8859-1')])
+                writer.writerow([smart_str("Responsável 1:", encoding='ISO-8859-1')])
+                writer.writerow([smart_str("Responsável 2:", encoding='ISO-8859-1')])
+                writer.writerow(["Nome", "Data de Nascimento", "Tel Celular1"])
+                for pessoa in onibus.pessoas:
+                    writer.writerow([smart_str(pessoa.nome, encoding='ISO-8859-1'),
+                                     smart_str(pessoa.dataNascimento, encoding='ISO-8859-1'),
+                                     smart_str(pessoa.telCelular1, encoding='ISO-8859-1')
+                                     ])
+                writer.writerow([""])
 
 class AtualizarHandler(RequestHandler):
     def get(self):
@@ -404,6 +450,7 @@ application = webapp.WSGIApplication(
                                       ('/contato', ContatoHandler),
                                       ('/exportarParticipante', ExportarParticipantesHandler),
                                       ('/exportarServico', ExportarServicoHandler),
+                                      ('/exportarOnibus', ExportarOnibusHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),

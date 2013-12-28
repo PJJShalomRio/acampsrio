@@ -5,15 +5,29 @@
 <title>Acamp's Rio 2014 - Relação dos Crachás</title
 </head>
 <body>
-	<img src="img/logo_small.png">
-	<h2 align="center">Relação dos Crachás</h2>
-
 	<div class="container">
 
 		<a href="#" onclick="window.print(); return false;">
 			<img src="img/icons/icon-printer.png">
 		</a>
-	
+
+		<div>
+			{% for item in listaItens %}
+			<table>
+				<tr>
+					<td><img src="img/logo_small.png"></td>
+				</tr>
+				<tr>
+					<td>{{item.nome}}</td>
+				</tr>
+				<tr>
+					<td>{{item.familia}}</td>
+				</tr>
+			</table>
+			<br>
+			{% endfor %}
+		</div>
+
 	</div>
 </body>
 </html>

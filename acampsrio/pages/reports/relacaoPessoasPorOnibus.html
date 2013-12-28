@@ -13,19 +13,26 @@
 		<a href="#" onclick="window.print(); return false;">
 			<img src="img/icons/icon-printer.png">
 		</a>
+		<a href="/exportarOnibus">
+			<img src="img/icons/icon-excel.png">
+		</a>
 
 		{% for onibus in listaOnibus %}
 		<h3 align="center">Ônibus {{ onibus.numero }}</h3>
+		<h4>Responsável 1:</h4>
+		<h4>Responsável 2:</h4>
 		<div class="tabela">
 			<table>
 				<tr>
 					<th>Nome</th>
 					<th>Data de Nascimento</th>
+					<th>Tel Celular1</th>
 				</tr>
 				{% for item in onibus.pessoas %}
 				<tr>
 					<td>{{ item.nome }}</td>
 					<td>{{ item.dataNascimento }}</td>
+					<td>{{ item.telCelular1	 }}</td>
 				</tr>
 				{% endfor %}
 				<tr>
