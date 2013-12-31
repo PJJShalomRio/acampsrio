@@ -22,5 +22,11 @@ indexes:
 
 - kind: Participante
   properties:
+  - name: familia
+  - name: pagouInscricao
+  - name: nome
+
+- kind: Participante
+  properties:
   - name: pagouInscricao
   - name: nome

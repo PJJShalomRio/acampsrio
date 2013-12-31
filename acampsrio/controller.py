@@ -187,17 +187,6 @@ class RelacaoServicosInscritosHandler(RequestHandler):
         else:
             self.response.out.write(template.render('pages/index.html', {}))
             
-class RelacaoCrachasParticipantesHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            results = Participante.all().order('nome')
-            
-            self.response.out.write(template.render('pages/reports/relacaoCrachasParticipantes.html',
-                                                    {'listaItens':results}))
-        else:
-            self.response.out.write(template.render('pages/index.html', {}))
-            
 class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -257,13 +246,13 @@ class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             
-            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA')
-            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA')
-            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA')
-            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE')
-            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL')
-            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL')
-            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA')
+            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA').filter('pagouInscricao = ', 'S')
+            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA').filter('pagouInscricao = ', 'S')
+            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA').filter('pagouInscricao = ', 'S')
+            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE').filter('pagouInscricao = ', 'S')
+            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL').filter('pagouInscricao = ', 'S')
+            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL').filter('pagouInscricao = ', 'S')
+            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA').filter('pagouInscricao = ', 'S')
             
             self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html',
                                                     {'familiaBranca':familiaBranca,
@@ -444,7 +433,7 @@ class ExportarFamiliaHandler(RequestHandler):
             self.response.headers['Content-Disposition'] = 'attachment; filename=familias.csv'
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
             
-            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA')
+            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia BRANCA", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaBranca:
@@ -455,7 +444,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA')
+            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia VERMELHA", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaVermeha:
@@ -466,7 +455,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA')
+            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia AMARELA", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaAmarela:
@@ -477,7 +466,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE')
+            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia VERDE", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaVerde:
@@ -488,7 +477,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL')
+            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia AZUL", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaAzul:
@@ -499,7 +488,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL')
+            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia CORAL", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaCoral:
@@ -510,7 +499,7 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
             
-            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA')
+            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA').filter('pagouInscricao = ', 'S')
             writer.writerow([smart_str("Familia PRETA", encoding='ISO-8859-1')])
             writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
             for participante in familiaPreta:
@@ -561,7 +550,6 @@ application = webapp.WSGIApplication(
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
-                                      ('/relacaoCrachasParticipantes', RelacaoCrachasParticipantesHandler),
                                       ('/relacaoEstatisticaParticipantesInscritos', RelacaoEstatisticaParticipantesInscritosHandler),
                                       ('/relacaoPessoasPorOnibus', RelacaoPessoasPorOnibusHandler),
                                       ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler)
