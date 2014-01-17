@@ -37,6 +37,7 @@ class Participante(db.Model):
     
     familia = db.StringProperty()
     pagouInscricao = db.StringProperty()
+    jaChegou = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
     
@@ -67,6 +68,7 @@ class Servico(db.Model):
     telComercialContato = db.StringProperty()
     
     pagouInscricao = db.StringProperty()
+    jaChegou = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
 

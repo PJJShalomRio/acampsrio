@@ -97,6 +97,7 @@ class InscricaoServicoHandler(RequestHandler):
             servico.telComercialContato = self.request.get('telComercialContato')
             
             servico.pagouInscricao = 'N'
+            servico.jaChegou = 'N'
             
             servico.put() 
         except Exception, e:
@@ -141,6 +142,7 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
 
             participante.pagouInscricao = 'N'
+            participante.jaChegou = 'N'
             participante.familia = listaFamilia[randint(0, 7)]
             
             participante.put()
@@ -275,7 +277,7 @@ class RelacaoPessoasPorOnibusHandler(RequestHandler):
             listaPassageiro = list()
             countPassageiro = 0
             countOnibus = 1
-            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S'):
+            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S').filter('jaChegou = ', 'S'):
                 if countPassageiro < 44:
                     listaPassageiro.append(participante)
                     countPassageiro += 1
@@ -315,7 +317,7 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Alergias", "Medicamentos",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
-                             "Familia", "Pagou a Inscricao"])
+                             "Familia", "Pagou a Inscricao", "Ja Chegou"])
             
             for participante in Participante.all().order('nome'):
                 writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
@@ -339,7 +341,8 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.telComercialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.familia, encoding='ISO-8859-1'),
-                                 smart_str(participante.pagouInscricao, encoding='ISO-8859-1')
+                                 smart_str(participante.pagouInscricao, encoding='ISO-8859-1'),
+                                 smart_str(participante.jaChegou, encoding='ISO-8859-1')
                                  ])
         
 class ExportarServicoHandler(RequestHandler):
@@ -355,7 +358,7 @@ class ExportarServicoHandler(RequestHandler):
                              "Alergias", "Medicamentos",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
-                             "Pagou a Inscricao"])
+                             "Pagou a Inscricao", "Ja Chegou"])
             
             for servico in Servico.all().order('nome'):
                 writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
@@ -377,7 +380,8 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(servico.telComercialContato, encoding='ISO-8859-1'),
-                                 smart_str(servico.pagouInscricao, encoding='ISO-8859-1')
+                                 smart_str(servico.pagouInscricao, encoding='ISO-8859-1'),
+                                 smart_str(servico.jaChegou, encoding='ISO-8859-1')
                                  ])
                 
 class ExportarOnibusHandler(RequestHandler):
@@ -392,7 +396,7 @@ class ExportarOnibusHandler(RequestHandler):
             listaPassageiro = list()
             countPassageiro = 0
             countOnibus = 1
-            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S'):
+            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S').filter('jaChegou = ', 'S'):
                 if countPassageiro < 44:
                     listaPassageiro.append(participante)
                     countPassageiro += 1
@@ -528,8 +532,12 @@ class AtualizarHandler(RequestHandler):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
             for participante in Participante.all():
-                participante.familia = 'BRANCA'
+                participante.jaChegou = 'N'
                 participante.put()
+            
+            for servico in Servico.all():
+                servico.jaChegou = 'N'
+                servico.put()
                 
         self.response.out.write(template.render('pages/index.html', {}))
 
