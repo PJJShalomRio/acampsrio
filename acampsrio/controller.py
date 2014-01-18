@@ -102,8 +102,11 @@ class InscricaoServicoHandler(RequestHandler):
             
             servico.pagouInscricao = 'N'
             servico.jaChegou = 'N'
-            
-            servico.put() 
+                
+            servicoJaExiste = Servico.all().filter('nome = ', servico.nome).count()
+            if servicoJaExiste is None or servicoJaExiste == 0: 
+                servico.put()
+             
         except Exception, e:
             self.response.out.write(template.render('pages/errointerno.html', {}))
             return e
@@ -149,7 +152,10 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.jaChegou = 'N'
             participante.familia = listaFamilia[randint(0, 7)]
             
-            participante.put()
+            participanteJaExiste = Participante.all().filter('nome = ', participante.nome).count()
+            if participanteJaExiste is None or participanteJaExiste == 0: 
+                participante.put()
+            
         except Exception, e:
             self.response.out.write(template.render('pages/errointerno.html', {}))
             return e
