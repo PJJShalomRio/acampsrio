@@ -585,8 +585,7 @@ application = webapp.WSGIApplication(
                                       ('/relacaoEstatisticaParticipantesInscritos', RelacaoEstatisticaParticipantesInscritosHandler),
                                       ('/relacaoPessoasPorOnibus', RelacaoPessoasPorOnibusHandler),
                                       ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler)
-                                     ],
-                                     debug=True)
+                                     ])
 def main():
     run_wsgi_app(application)
 
