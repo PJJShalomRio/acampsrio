@@ -175,11 +175,16 @@ h2 {
 }
 
 /* MAIN SECTIONS */
+
+#acamps {
+	background: url('../img/logo_header.png') center no-repeat;
+	height: 100%;
+}
+
 #home {
 	width: 100%;
 	height: 100%;
 	color: #FFF;
-	background: url('../img/background.jpg') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
