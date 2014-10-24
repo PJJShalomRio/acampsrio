@@ -18,7 +18,7 @@
 						<legend>Informações pessoais</legend>
 						<label>Nome *:</label>
 						<input id="nome" name="nome" type="text" />
-						<label>Data de nascimento *:</label>
+						<label>Data de nascimento *: Menor de idade é necessário apresentar autorização de próprio punho assinada pelo responsável.</label>
 						<input id="dataNascimento" name="dataNascimento" type="text" />
 						<label>Identidade *:</label>
 						<input id="identidade" name="identidade" type="text" />
@@ -58,10 +58,14 @@
 						<label>E-mail *:</label>
 						<input id="email" name="email" type="text" />
 						<legend>Saúde</legend>
-						<label>Alergias:</label>
-						<input id="alergias" name="alergias" type="text" />
-						<label>Medicamentos:</label>
-						<input id="medicamentos" name="medicamentos" type="text" />
+						<label>Tem algum problema de saúde? Qual?:</label>
+						<input id="problemaSaude" name="problemaSaude" type="text" />
+						<label>Restrição de atividades físicas? Quais?:</label>
+						<input id="restricaoAtividadeFisica" name="restricaoAtividadeFisica" type="text" />
+						<label>Tem alguma alergias? (alimentos, bebidas, insetos, medicamentos):</label>
+						<input id="temAlgumaAlergia" name="temAlgumaAlergia" type="text" />
+						<label>Toma algum medicamento? Quais?:</label>
+						<input id="tomaAlgumMedicamento" name="tomaAlgumMedicamentos" type="text" />
 						<legend>Contato em caso de emergência</legend>
 						<label>Nome *:</label>
 						<input id="nomeContato" name="nomeContato" type="text" />
@@ -112,25 +116,7 @@
 						Li e concordo com todos os termos do Contrato. *
 						<br />
 						<br />
-						<p align="justify">O valor da inscrição do Acamp's Rio 2015 é
-							R$ 225,00. Este valor pode ser pago nas seguintes formas:</p>
-						<ul>
-							<li>Dinheiro/Cheque - Diretamente na Comunidade Católica
-								Shalom</li>
-							<li>
-								Depósito -
-								<b>Banco:</b>
-								Caixa Econômica Federal
-								<b>Agência:</b>
-								1343
-								<b>Operação:</b>
-								003
-								<b>Conta Corrente:</b>
-								1147-1
-							</li>
-							<li>Pagseguro em até 10 vezes no cartão (R$ 225,00 + R$
-								11,25 de taxa Pagseguro totalizando R$ 236,25)</li>
-						</ul>
+						{% include 'informacoesPagamento.html'%}
 						<br />
 						<button name="send" type="submit" class="button">Enviar</button>
 					</fieldset>

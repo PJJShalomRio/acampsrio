@@ -91,8 +91,10 @@ class InscricaoServicoHandler(RequestHandler):
             servico.telResidencial = self.request.get('telResidencial')
             servico.email = self.request.get('email')
             
-            servico.alergias = self.request.get('alergias')
-            servico.medicamentos = self.request.get('medicamentos')
+            servico.problemaSaude = self.request.get('problemaSaude')
+            servico.restricaoAtividadeFisica = self.request.get('restricaoAtividadeFisica')
+            servico.temAlgumaAlergia = self.request.get('temAlgumaAlergia')
+            servico.tomaAlgumMedicamento = self.request.get('tomaAlgumMedicamento')
             
             servico.nomeContato = self.request.get('nomeContato')
             servico.telCelular1Contato = self.request.get('telCelular1Contato')
@@ -137,8 +139,10 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.telResidencial = self.request.get('telResidencial')
             participante.email = self.request.get('email')
             
-            participante.alergias = self.request.get('alergias')
-            participante.medicamentos = self.request.get('medicamentos')
+            participante.problemaSaude = self.request.get('problemaSaude')
+            participante.restricaoAtividadeFisica = self.request.get('restricaoAtividadeFisica')
+            participante.temAlgumaAlergia = self.request.get('temAlgumaAlergia')
+            participante.tomaAlgumMedicamento = self.request.get('tomaAlgumMedicamento')
             
             participante.nomeContato = self.request.get('nomeContato')
             participante.telCelular1Contato = self.request.get('telCelular1Contato')
@@ -324,7 +328,7 @@ class ExportarParticipantesHandler(RequestHandler):
             writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade",
                              "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
-                             "Alergias", "Medicamentos",
+                             "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
                              "Familia", "Pagou a Inscricao", "Ja Chegou"])
@@ -343,8 +347,10 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telCelular2, encoding='ISO-8859-1'),
                                  smart_str(participante.telResidencial, encoding='ISO-8859-1'),
                                  smart_str(participante.email, encoding='ISO-8859-1'),
-                                 smart_str(participante.alergias, encoding='ISO-8859-1'),
-                                 smart_str(participante.medicamentos, encoding='ISO-8859-1'),
+                                 smart_str(participante.problemaSaude, encoding='ISO-8859-1'),
+                                 smart_str(participante.restricaoAtividadeFisica, encoding='ISO-8859-1'),
+                                 smart_str(participante.temAlgumaAlergia, encoding='ISO-8859-1'),
+                                 smart_str(participante.tomaAlgumMedicamento, encoding='ISO-8859-1'),
                                  smart_str(participante.nomeContato, encoding='ISO-8859-1'),
                                  smart_str(participante.telCelular1Contato, encoding='ISO-8859-1'),
                                  smart_str(participante.telCelular2Contato, encoding='ISO-8859-1'),
@@ -365,7 +371,7 @@ class ExportarServicoHandler(RequestHandler):
             writer.writerow(["Nome", "Data de Nascimento", "Sexo",
                              "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
-                             "Alergias", "Medicamentos",
+                             "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
                              "Pagou a Inscricao", "Ja Chegou"])
@@ -383,8 +389,10 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular2, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencial, encoding='ISO-8859-1'),
                                  smart_str(servico.email, encoding='ISO-8859-1'),
-                                 smart_str(servico.alergias, encoding='ISO-8859-1'),
-                                 smart_str(servico.medicamentos, encoding='ISO-8859-1'),
+                                 smart_str(servico.problemaSaude, encoding='ISO-8859-1'),
+                                 smart_str(servico.restricaoAtividadeFisica, encoding='ISO-8859-1'),
+                                 smart_str(servico.temAlgumaAlergia, encoding='ISO-8859-1'),
+                                 smart_str(servico.tomaAlgumMedicamento, encoding='ISO-8859-1'),
                                  smart_str(servico.nomeContato, encoding='ISO-8859-1'),
                                  smart_str(servico.telCelular1Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),

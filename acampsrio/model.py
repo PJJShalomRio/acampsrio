@@ -24,8 +24,10 @@ class Participante(db.Model):
     telResidencial = db.StringProperty()
     email = db.StringProperty()
     
-    alergias = db.StringProperty()
-    medicamentos = db.StringProperty()
+    problemaSaude = db.StringProperty()
+    restricaoAtividadeFisica = db.StringProperty()
+    temAlgumaAlergia = db.StringProperty()
+    tomaAlgumMedicamento = db.StringProperty()
     
     nomeContato = db.StringProperty()
     telCelular1Contato = db.StringProperty()
@@ -58,8 +60,10 @@ class Servico(db.Model):
     telResidencial = db.StringProperty()
     email = db.StringProperty()
     
-    alergias = db.StringProperty()
-    medicamentos = db.StringProperty()
+    problemaSaude = db.StringProperty()
+    restricaoAtividadeFisica = db.StringProperty()
+    temAlgumaAlergia = db.StringProperty()
+    tomaAlgumMedicamento = db.StringProperty()
     
     nomeContato = db.StringProperty()
     telCelular1Contato = db.StringProperty()
