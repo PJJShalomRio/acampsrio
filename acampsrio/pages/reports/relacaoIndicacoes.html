@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+{% include 'header-reports.html'%}
+<title>Acamp's Rio 2015 - Relação de Indicações</title>
+
+</head>
+<body>
+	<img src="img/logo_small.png">
+	<h2 align="center">Relação de Indicações</h2>
+
+	<div class="container">
+
+		<a href="#" onclick="window.print(); return false;">
+			<img src="img/icons/icon-printer.png">
+		</a>
+		<a href="/exportarIndicacoes">
+			<img src="img/icons/icon-excel.png">
+		</a>
+
+		<div class="tabela">
+			<table>
+				<tr>
+					<th>Nome</th>
+					<th>Celular</th>
+					<th>Telefone</th>
+					<th>Email</th>
+				</tr>
+				{% for item in listaItens %}
+				<tr>
+					<td>{{ item.nomeIndicacao }}</td>
+					<td>{{ item.telCelularIndicacao }}</td>
+					<td>{{ item.telResidencialIndicacao }}</td>
+					<td>{{ item.emailIndicacao }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</body>
+</html>

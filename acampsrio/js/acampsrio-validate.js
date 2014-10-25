@@ -8,6 +8,8 @@ $(document).ready(function() {
 	$('#telCelular2Contato').mask('(00) 00000-0000');
 	$('#telResidencialContato').mask('(00) 0000-0000');
 	$('#telComercialContato').mask('(00) 0000-0000');
+	$('#telCelularIndicacao').mask('(00) 00000-0000');
+	$('#telResidencialIndicacao').mask('(00) 0000-0000');
 
 	$("#contatoForm").validate({
 		rules : {
@@ -104,6 +106,15 @@ $(document).ready(function() {
 			},
 			termoCompromisso : {
 				required : true
+			},
+			telCelularIndicacao : {
+				minlength: 15
+			},
+			telResidencialIndicacao : {
+				minlength: 14
+			},
+			emailIndicacao : {
+				email : true
 			}
 		},
 		messages : {
@@ -164,6 +175,15 @@ $(document).ready(function() {
 			},
 			termoCompromisso : {
 				required : "A inscrição só será aceita se você concordar com todos os termos citados no contrato."
+			},
+			telCelularIndicacao : {
+				minlength: "Celular indicação inválido."
+			},
+			telResidencialIndicacao : {
+				minlength: "Telefone indicação inválido."
+			},
+			emailIndicacao : {
+				email : "E-mail inválido."
 			}
 		}
 	});

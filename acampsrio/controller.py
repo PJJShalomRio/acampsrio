@@ -151,6 +151,11 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.telComercialContato = self.request.get('telComercialContato')
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
+            
+            participante.nomeIndicacao = self.request.get('nomeIndicacao')
+            participante.telCelularIndicacao = self.request.get('telCelularIndicacao')
+            participante.telResidencialIndicacao = self.request.get('telResidencialIndicacao')
+            participante.emailIndicacao = self.request.get('emailIndicacao')
 
             participante.pagouInscricao = 'N'
             participante.jaChegou = 'N'
@@ -545,6 +550,32 @@ class ExportarFamiliaHandler(RequestHandler):
                                  ])
             writer.writerow([""])
 
+class RelacaoIndicaoesHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            results = Participante.all().filter('nomeIndicacao !=', '').order('nomeIndicacao')
+            
+            self.response.out.write(template.render('pages/reports/relacaoIndicacoes.html',
+                                                    {'listaItens':results}))
+
+
+class ExportarIndicaoesHandler(RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user and users.is_current_user_admin():
+            self.response.headers['Content-Type'] = 'application/csv'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=indicacoes.csv'
+            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(["Nome", "Telefone Celular", "Telefone Residencial", "Email"])
+            
+            for participante in Participante.all().filter('nomeIndicacao !=', '').order('nomeIndicacao'):
+                writer.writerow([smart_str(participante.nomeIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(participante.telCelularIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(participante.telResidencialIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(participante.emailIndicacao, encoding='ISO-8859-1'),
+                                 ])
+
 class AtualizarHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -592,7 +623,9 @@ application = webapp.WSGIApplication(
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
                                       ('/relacaoEstatisticaParticipantesInscritos', RelacaoEstatisticaParticipantesInscritosHandler),
                                       ('/relacaoPessoasPorOnibus', RelacaoPessoasPorOnibusHandler),
-                                      ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler)
+                                      ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler),
+                                      ('/relacaoIndicoes', RelacaoIndicaoesHandler),
+                                      ('/exportarIndicacoes', ExportarIndicaoesHandler)
                                      ])
 def main():
     run_wsgi_app(application)

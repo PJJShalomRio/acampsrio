@@ -37,6 +37,11 @@ class Participante(db.Model):
     termoCompromisso = db.StringProperty()
     ficouSabendo = db.StringListProperty()
     
+    nomeIndicacao = db.StringProperty()
+    telCelularIndicacao = db.StringProperty()
+    telResidencialIndicacao = db.StringProperty()
+    emailIndicacao = db.StringProperty()
+    
     familia = db.StringProperty()
     pagouInscricao = db.StringProperty()
     jaChegou = db.StringProperty()
