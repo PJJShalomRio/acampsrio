@@ -4,7 +4,7 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from model import Participante, Servico, Contato, Onibus
+from model import Participante, Servico, Contato, Onibus, Indicacao
 import collections
 import csv
 from random import randint
@@ -66,6 +66,10 @@ class RealizarPagamentoHandler(RequestHandler):
 class RealizarPagamentoServicoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/realizarPagamentoServico.html', {}))
+
+class PreInscricaoServicoHandler(RequestHandler):
+    def get(self):
+        self.response.out.write(template.render('pages/preInscricaoServico.html', {}))
 
 class InscricaoServicoHandler(RequestHandler):
     def get(self):
@@ -151,11 +155,6 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.telComercialContato = self.request.get('telComercialContato')
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
-            
-            participante.nomeIndicacao = self.request.get('nomeIndicacao')
-            participante.telCelularIndicacao = self.request.get('telCelularIndicacao')
-            participante.telResidencialIndicacao = self.request.get('telResidencialIndicacao')
-            participante.emailIndicacao = self.request.get('emailIndicacao')
 
             participante.pagouInscricao = 'N'
             participante.jaChegou = 'N'
@@ -164,6 +163,16 @@ class InscricaoParticipanteHandler(RequestHandler):
             participanteJaExiste = Participante.all().filter('nome = ', participante.nome).count()
             if participanteJaExiste is None or participanteJaExiste == 0: 
                 participante.put()
+                
+                indicacao = Indicacao()
+                indicacao.nome = self.request.get('nome').strip().upper()    
+                indicacao.nomeIndicacao = self.request.get('nomeIndicacao').strip().upper()
+                indicacao.telCelularIndicacao = self.request.get('telCelularIndicacao')
+                indicacao.telResidencialIndicacao = self.request.get('telResidencialIndicacao')
+                indicacao.emailIndicacao = self.request.get('emailIndicacao')
+                if indicacao.nomeIndicacao != '':
+                    indicacao.put()
+                
             
         except Exception, e:
             self.response.out.write(template.render('pages/errointerno.html', {}))
@@ -554,7 +563,7 @@ class RelacaoIndicaoesHandler(RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user and users.is_current_user_admin():
-            results = Participante.all().filter('nomeIndicacao !=', '').order('nomeIndicacao')
+            results = Indicacao.all().filter('nomeIndicacao !=', '').order('nomeIndicacao')
             
             self.response.out.write(template.render('pages/reports/relacaoIndicacoes.html',
                                                     {'listaItens':results}))
@@ -567,13 +576,14 @@ class ExportarIndicaoesHandler(RequestHandler):
             self.response.headers['Content-Type'] = 'application/csv'
             self.response.headers['Content-Disposition'] = 'attachment; filename=indicacoes.csv'
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(["Nome", "Telefone Celular", "Telefone Residencial", "Email"])
+            writer.writerow(["Nome", "Telefone Celular", "Telefone Residencial", "Email", "Indicado por"])
             
-            for participante in Participante.all().filter('nomeIndicacao !=', '').order('nomeIndicacao'):
-                writer.writerow([smart_str(participante.nomeIndicacao, encoding='ISO-8859-1'),
-                                 smart_str(participante.telCelularIndicacao, encoding='ISO-8859-1'),
-                                 smart_str(participante.telResidencialIndicacao, encoding='ISO-8859-1'),
-                                 smart_str(participante.emailIndicacao, encoding='ISO-8859-1'),
+            for indicacao in Indicacao.all().filter('nomeIndicacao !=', '').order('nomeIndicacao'):
+                writer.writerow([smart_str(indicacao.nomeIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(indicacao.telCelularIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(indicacao.telResidencialIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(indicacao.emailIndicacao, encoding='ISO-8859-1'),
+                                 smart_str(indicacao.nome, encoding='ISO-8859-1')
                                  ])
 
 class AtualizarHandler(RequestHandler):
@@ -607,7 +617,7 @@ application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
                                       ('/inscricaoServico', InscricaoServicoHandler),
-                                      ('/inscricaoservico', InscricaoServicoHandler),
+                                      ('/preInscricaoServico', PreInscricaoServicoHandler),
                                       ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/informacoesImportantes', InformacoesImportantesHandler),
                                       ('/login', LoginHandler),

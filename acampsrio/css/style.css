@@ -66,10 +66,11 @@ strong {
 }
 
 h2 {
-	color: #555;
+	color: #4c1315;
 	font-weight: 300;
 	font-size: 52px;
-	padding: 30px 0px 0px 0px;
+	padding: 20px 20px 20px 20px;
+	background-color: #f5ab1c;
 }
 
 .breaker {
@@ -122,7 +123,7 @@ h2 {
 .navbar {
 	margin-bottom: 0;
 	z-index: 42;
-	background: #FFF;
+	background: #4c1315;
 	height: 65px;
 	padding-right: 20px;
 }
@@ -165,7 +166,7 @@ h2 {
 
 .navbar-inner {
 	background-image: none;
-	background: white;
+	background: #4c1315;
 	box-shadow: none;
 	border: none;
 }
@@ -175,16 +176,11 @@ h2 {
 }
 
 /* MAIN SECTIONS */
-
-#acamps {
-	background: url('../img/logo_header.png') center no-repeat;
-	height: 100%;
-}
-
 #home {
 	width: 100%;
 	height: 100%;
 	color: #FFF;
+	background: url('../img/background.png') no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -242,6 +238,12 @@ h2 {
     padding-left: 17px;
 }
 
+.navbar .nav>li>a {
+	float: none;
+	padding: 10px 15px 10px;
+	color: #FFF;
+}
+
 p {
 	font-size: 16px;
 	color:#777;
@@ -259,11 +261,11 @@ ul{
 
 footer {
 	padding: 20px 0;
-	background-color: #ccc;
+	background-color: #4c1315;
 }
 
 footer p.copyright {
-	color: #777;
+	color: #FFF;
 }
 
 footer a {

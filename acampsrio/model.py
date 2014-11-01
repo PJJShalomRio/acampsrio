@@ -37,16 +37,18 @@ class Participante(db.Model):
     termoCompromisso = db.StringProperty()
     ficouSabendo = db.StringListProperty()
     
-    nomeIndicacao = db.StringProperty()
-    telCelularIndicacao = db.StringProperty()
-    telResidencialIndicacao = db.StringProperty()
-    emailIndicacao = db.StringProperty()
-    
     familia = db.StringProperty()
     pagouInscricao = db.StringProperty()
     jaChegou = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
+
+class Indicacao(db.Model):
+    nome = db.StringProperty()
+    nomeIndicacao = db.StringProperty()
+    telCelularIndicacao = db.StringProperty()
+    telResidencialIndicacao = db.StringProperty()
+    emailIndicacao = db.StringProperty()
     
 class Servico(db.Model):
     
@@ -100,7 +102,7 @@ class Contato(db.Model):
      
     def enviarEmail(self):
             mail.send_mail(sender="contato@acampsrio.com.br",
-            to="acampsrio@comshalom.org",
+            to="contato@acampsrio.com.br",
             subject="[ACAMPSRIO] - Contato",
             body="Nome: " + self.nome + "\nCelular: " + self.telCelular1 + "\nEmail: " + self.email + "\nMensagem: " + self.comentario)
             
