@@ -157,6 +157,8 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
 
+            participante.indicadoPor = self.request.get('indicadoPor')
+
             participante.pagouInscricao = 'N'
             participante.jaChegou = 'N'
             participante.familia = listaFamilia[randint(0, 7)]
@@ -346,6 +348,7 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
+                             "Indicado por",
                              "Familia", "Pagou a Inscricao", "Ja Chegou"])
             
             for participante in Participante.all().order('nome'):
@@ -371,6 +374,7 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.telComercialContato, encoding='ISO-8859-1'),
+                                 smart_str(participante.indicadoPor, encoding='ISO-8859-1'),
                                  smart_str(participante.familia, encoding='ISO-8859-1'),
                                  smart_str(participante.pagouInscricao, encoding='ISO-8859-1'),
                                  smart_str(participante.jaChegou, encoding='ISO-8859-1')
