@@ -55,6 +55,7 @@ class Servico(db.Model):
     nome = db.StringProperty()
     dataNascimento = db.StringProperty()
     sexo = db.StringProperty()
+    equipeServico = db.StringProperty()
     
     logradouro = db.StringProperty()
     complemento = db.StringProperty()

@@ -82,6 +82,7 @@ class InscricaoServicoHandler(RequestHandler):
             servico.nome = self.request.get('nome').strip().upper()
             servico.dataNascimento = self.request.get('dataNascimento')
             servico.sexo = self.request.get('sexo')
+            servico.equipeServico = self.request.get('equipeServico')
             servico.identidade = self.request.get('identidade')
             
             servico.logradouro = self.request.get('logradouro')
@@ -382,7 +383,7 @@ class ExportarServicoHandler(RequestHandler):
             self.response.headers['Content-Type'] = 'application/csv'
             self.response.headers['Content-Disposition'] = 'attachment; filename=servos.csv'
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(["Nome", "Data de Nascimento", "Sexo",
+            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Equipe",
                              "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
                              "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
@@ -394,6 +395,7 @@ class ExportarServicoHandler(RequestHandler):
                 writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
                                  smart_str(servico.dataNascimento, encoding='ISO-8859-1'),
                                  smart_str(servico.sexo, encoding='ISO-8859-1'),
+                                 smart_str(servico.equipeServico, encoding='ISO-8859-1'),
                                  smart_str(servico.logradouro, encoding='ISO-8859-1'),
                                  smart_str(servico.complemento, encoding='ISO-8859-1'),
                                  smart_str(servico.cidade, encoding='ISO-8859-1'),

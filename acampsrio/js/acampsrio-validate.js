@@ -200,6 +200,9 @@ $(document).ready(function() {
 			sexo : {
 				required : true
 			},
+			equipeServico : {
+				required : true
+			},
 			logradouro : {
 				required : true
 			},
@@ -253,6 +256,9 @@ $(document).ready(function() {
 			},
 			sexo : {
 				required : "Campo obrigatório."
+			},
+			equipeServico : {
+				required : "Equipe de Serviço obrigatório."
 			},
 			logradouro : {
 				required : "Campo obrigatório."
