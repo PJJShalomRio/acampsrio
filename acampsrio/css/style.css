@@ -66,11 +66,11 @@ strong {
 }
 
 h2 {
-	color: #4c1315;
+	color: #ffffff;
 	font-weight: 300;
 	font-size: 52px;
 	padding: 20px 20px 20px 20px;
-	background-color: #f5ab1c;
+	background-color: #8ea700;
 }
 
 .breaker {
@@ -123,7 +123,7 @@ h2 {
 .navbar {
 	margin-bottom: 0;
 	z-index: 42;
-	background: #4c1315;
+	background: #013556;
 	height: 65px;
 	padding-right: 20px;
 }
@@ -166,7 +166,7 @@ h2 {
 
 .navbar-inner {
 	background-image: none;
-	background: #4c1315;
+	background: #013556;
 	box-shadow: none;
 	border: none;
 }
@@ -261,7 +261,7 @@ ul{
 
 footer {
 	padding: 20px 0;
-	background-color: #4c1315;
+	background-color: #8ea700;
 }
 
 footer p.copyright {
