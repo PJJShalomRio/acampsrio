@@ -12,8 +12,7 @@
 				<div class="span12 centered">
 					<h2>Parabéns!!! Você está a um passo para servir no Acamp's
 						Rio 2015</h2>
-					<div class="breaker">
-					</div>
+					<div class="breaker"></div>
 				</div>
 
 				{% include 'informacoesPagamento.html'%}
@@ -21,15 +20,17 @@
 				<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
 				<form
 					action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add"
-					method="post">
+					method="post" onsubmit="PagSeguroLightbox(this); return false;">
 					<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
 					<input type="hidden" name="itemCode"
-						value="25DD06A75A5A0A13344FDFBCD202D225" /> <input type="image"
-						src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/209x48-pagar-azul-assina.gif"
+						value="F21509FEC6C64456643F1F814A7360FD" /> <input type="image"
+						src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"
 						name="submit"
 						alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 				</form>
-				<!-- FINAL FORMULARIO BOTAO PAGSEGURO --> 
+				<script type="text/javascript"
+					src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
+				<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
 
 			</div>
 		</div>
