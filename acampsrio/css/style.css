@@ -62,7 +62,7 @@ strong {
 }
 
 .subtittle a:hover {
-	color: #777;
+	color: #556633;
 }
 
 h2 {
@@ -70,7 +70,7 @@ h2 {
 	font-weight: 300;
 	font-size: 52px;
 	padding: 20px 20px 20px 20px;
-	background-color: #8ea700;
+	background-color: #ff7744;
 }
 
 .breaker {
@@ -123,7 +123,7 @@ h2 {
 .navbar {
 	margin-bottom: 0;
 	z-index: 42;
-	background: #013556;
+	background: #556633;
 	height: 65px;
 	padding-right: 20px;
 }
@@ -166,7 +166,7 @@ h2 {
 
 .navbar-inner {
 	background-image: none;
-	background: #013556;
+	background: #556633;
 	box-shadow: none;
 	border: none;
 }
@@ -234,8 +234,8 @@ h2 {
 }
 
 #contato .info p {
-    color:#777;
-    padding-left: 17px;
+    color:#556633;
+    padding-left: 18px;
 }
 
 .navbar .nav>li>a {
@@ -245,13 +245,13 @@ h2 {
 }
 
 p {
-	font-size: 16px;
-	color:#777;
+	font-size: 18px;
+	color:#556633;
 }
 
 ul{
-	font-size: 16px;
-	color:#777;
+	font-size: 18px;
+	color:#556633;
 }
 
 .contactAddress {background: url("../img/icons/icon-address-grey.png") no-repeat scroll left 7px transparent;}
@@ -261,7 +261,7 @@ ul{
 
 footer {
 	padding: 20px 0;
-	background-color: #8ea700;
+	background-color: #556633;
 }
 
 footer p.copyright {
@@ -269,7 +269,7 @@ footer p.copyright {
 }
 
 footer a {
-	color: #777;
+	color: #556633;
 	text-decoration: none;
 }
 
@@ -482,7 +482,7 @@ textarea.error {
 
 .icon {
 	font-size: 50px;
-	color: #777;
+	color: #556633;
 	text-decoration: none;
 	-webkit-transition: all .5s ease-in-out;
 	-moz-transition: all .5s ease-in-out;
