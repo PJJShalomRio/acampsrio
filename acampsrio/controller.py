@@ -622,8 +622,6 @@ class SortearFamiliasHandler(RequestHandler):
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
-                                      ('/inscricaoServico', InscricaoServicoHandler),
-                                      ('/preInscricaoServico', PreInscricaoServicoHandler),
                                       ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/informacoesImportantes', InformacoesImportantesHandler),
                                       ('/login', LoginHandler),
