@@ -1250,5 +1250,24 @@ jQuery.validator.addMethod("dateBR", function(value, element) {
 		return false;
 	if (ano < 1900)
 		return false;
-	return true;
-}, "Informe uma data válida"); // Mensagem padrão
+	
+	var idadeMin =  14;
+    var idadeMax =  28;
+	
+    var dataAtual = new Date();
+    
+    var dataNascimento = new Date();
+    dataNascimento.setFullYear(ano, mes-1, dia);
+
+    var dataNascimentoIdadeMinima = new Date();
+    dataNascimentoIdadeMinima.setFullYear(dataAtual.getFullYear() - idadeMin);
+    
+    var dataNascimentoIdadeMaxima = new Date();
+    dataNascimentoIdadeMaxima.setFullYear(dataAtual.getFullYear() - idadeMax);
+    
+    if (dataNascimento > dataNascimentoIdadeMinima || dataNascimento < dataNascimentoIdadeMaxima)
+    	return false;
+
+    return true;
+    
+}, "Informe uma data válida. Idade permitida de 14 a 28 anos."); // Mensagem padrão
