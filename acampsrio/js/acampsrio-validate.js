@@ -129,7 +129,7 @@ $(document).ready(function() {
 			},
 			dataNascimento : {
 				required : "Campo obrigatório.",
-				dateBR : "Data de nascimento inválida. Idade permitida de 14 a 28 anos."
+				dateBR : "Data de nascimento inválida. Apenas maiores de 17 anos."
 			},
 			sexo : {
 				required : "Campo obrigatório."
