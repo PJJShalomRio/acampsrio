@@ -59,6 +59,12 @@ $(document).ready(function() {
 			sexo : {
 				required : true
 			},
+			universitario : {
+				required : true
+			},
+			barraca : {
+				required : true
+			},
 			identidade : {
 				required : true
 			},
@@ -126,6 +132,12 @@ $(document).ready(function() {
 				dateBR : "Data de nascimento inválida. Idade permitida de 14 a 28 anos."
 			},
 			sexo : {
+				required : "Campo obrigatório."
+			},
+			universitario : {
+				required : "Campo obrigatório."
+			},
+			barraca : {
 				required : "Campo obrigatório."
 			},
 			identidade : {

@@ -131,6 +131,8 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.nome = self.request.get('nome').strip().upper()
             participante.dataNascimento = self.request.get('dataNascimento')
             participante.sexo = self.request.get('sexo')
+            participante.universitario = self.request.get('universitario')
+            participante.barraca = self.request.get('barraca')
             participante.identidade = self.request.get('identidade')
             
             participante.logradouro = self.request.get('logradouro')
@@ -156,8 +158,6 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.telComercialContato = self.request.get('telComercialContato')
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
-
-            participante.indicadoPor = self.request.get('indicadoPor')
 
             participante.pagouInscricao = 'N'
             participante.jaChegou = 'N'

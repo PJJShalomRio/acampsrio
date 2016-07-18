@@ -11,6 +11,8 @@ class Participante(db.Model):
     nome = db.StringProperty()
     dataNascimento = db.StringProperty()
     sexo = db.StringProperty()
+    universitario = db.StringProperty()
+    barraca = db.StringProperty()
     identidade = db.StringProperty()
     
     logradouro = db.StringProperty()
@@ -36,8 +38,6 @@ class Participante(db.Model):
     telComercialContato = db.StringProperty()
     termoCompromisso = db.StringProperty()
     ficouSabendo = db.StringListProperty()
-    
-    indicadoPor = db.StringProperty()
     
     familia = db.StringProperty()
     pagouInscricao = db.StringProperty()
@@ -104,8 +104,8 @@ class Contato(db.Model):
     dataContato = db.DateTimeProperty(auto_now=True, auto_now_add=True)
      
     def enviarEmail(self):
-            mail.send_mail(sender="contato@acampsrio.com.br",
-            to="contato@acampsrio.com.br",
+            mail.send_mail(sender="tipjjriodejaneiro@gmail.com",
+            to="tipjjriodejaneiro@gmail.com",
             subject="[ACAMPSRIO] - Contato",
             body="Nome: " + self.nome + "\nCelular: " + self.telCelular1 + "\nEmail: " + self.email + "\nMensagem: " + self.comentario)
             
