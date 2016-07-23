@@ -1173,11 +1173,3 @@ textarea.error {
 	left: 5%;
 	bottom: 5%;
 }
-
-.data-evento {
-    top: 10px;
-    right: 10px;
-    height: 180px;
-    width: 387px;
-    position: fixed;
-}

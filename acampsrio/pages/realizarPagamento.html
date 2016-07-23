@@ -17,18 +17,16 @@
 				{% include 'informacoesPagamento.html'%}
 
 				<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
-				<form
-					action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add"
-					method="post" onsubmit="PagSeguroLightbox(this); return false;">
+				<form action="https://pagseguro.uol.com.br/checkout/v2/payment.html"
+					method="post">
 					<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-					<input type="hidden" name="itemCode"
-						value="9D755FEF8E8E7783343A1FB31A3B5CD9" /> <input type="image"
-						src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"
+					<input type="hidden" name="code"
+						value="67ABAE80D4D4E60FF4D23FBAA9DC61B0" /> <input type="hidden"
+						name="iot" value="button" /> <input type="image"
+						src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif"
 						name="submit"
 						alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 				</form>
-				<script type="text/javascript"
-					src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 				<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
 
 			</div>
