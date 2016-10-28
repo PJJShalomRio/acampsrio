@@ -131,7 +131,6 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.nome = self.request.get('nome').strip().upper()
             participante.dataNascimento = self.request.get('dataNascimento')
             participante.sexo = self.request.get('sexo')
-            participante.universitario = self.request.get('universitario')
             participante.barraca = self.request.get('barraca')
             participante.identidade = self.request.get('identidade')
             
@@ -348,7 +347,7 @@ class ExportarParticipantesHandler(RequestHandler):
                              "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
-                             "Familia", "Pagou a Inscricao", "Ja Chegou"])
+                             "Familia", "Vai Levar Barraca", "Pagou a Inscricao", "Ja Chegou"])
             
             for participante in Participante.all().order('nome'):
                 writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
@@ -374,6 +373,7 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.telComercialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.familia, encoding='ISO-8859-1'),
+                                 smart_str(participante.barraca, encoding='ISO-8859-1'),
                                  smart_str(participante.pagouInscricao, encoding='ISO-8859-1'),
                                  smart_str(participante.jaChegou, encoding='ISO-8859-1')
                                  ])
