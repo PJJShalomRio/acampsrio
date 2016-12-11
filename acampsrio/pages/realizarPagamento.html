@@ -16,11 +16,12 @@
 
 				{% include 'informacoesPagamento.html'%} ​
 				<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
-				<form action="https://pagseguro.uol.com.br/checkout/v2/payment.html"
+				<form
+					action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add"
 					method="post">
 					<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-					<input type="hidden" name="code"
-						value="B2721808D6D61D5FF4878F9A51158E87" /> <input type="hidden"
+					<input type="hidden" name="itemCode"
+						value="1575F9D2D7D7480334CD3F87B6DD08EB" /> <input type="hidden"
 						name="iot" value="button" /> <input type="image"
 						src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar.gif"
 						name="submit"
