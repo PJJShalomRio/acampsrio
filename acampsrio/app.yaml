@@ -19,6 +19,8 @@ handlers:
   static_dir: img
 - url: /font
   static_dir: font
+- url: /pdf
+  static_dir: pdf
 
 - url: /sitemap.xml
   static_files: sitemap.xml

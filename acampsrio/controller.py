@@ -55,10 +55,6 @@ class InformacoesImportantesHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/informacoesImportantes.html', {}))
 
-class TermoCompromissoHandler(RequestHandler):
-    def get(self):
-        self.response.out.write(template.render('pages/termocompromisso.html', {}))
-
 class RealizarPagamentoHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/realizarPagamento.html', {}))
@@ -621,7 +617,6 @@ application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
                                       ('/inscricaoParticipante', InscricaoParticipanteHandler),
                                       ('/inscricaoServico', InscricaoServicoHandler),
-                                      ('/termoCompromisso', TermoCompromissoHandler),
                                       ('/informacoesImportantes', InformacoesImportantesHandler),
                                       ('/login', LoginHandler),
                                       ('/logout', LogoutHandler),

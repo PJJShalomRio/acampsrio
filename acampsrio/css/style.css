@@ -62,7 +62,7 @@ strong {
 }
 
 .subtittle a:hover {
-	color: #6ea2d1;
+	color: #31bdc0;
 }
 
 h2 {
@@ -70,7 +70,7 @@ h2 {
 	font-weight: 300;
 	font-size: 52px;
 	padding: 20px 20px 20px 20px;
-	background-color: #fcc103;
+	background-color: #c0aca0;
 }
 
 .breaker {
@@ -123,7 +123,7 @@ h2 {
 .navbar {
 	margin-bottom: 0;
 	z-index: 42;
-	background: #6ea2d1;
+	background: #31bdc0;
 	height: 65px;
 	padding-right: 20px;
 }
@@ -166,7 +166,7 @@ h2 {
 
 .navbar-inner {
 	background-image: none;
-	background: #6ea2d1;
+	background: #31bdc0;
 	box-shadow: none;
 	border: none;
 }
@@ -180,12 +180,12 @@ h2 {
 	width: 100%;
 	height: 100%;
 	color: #FFF;
-	background: url('../img/background.jpg') no-repeat center center fixed;
+	background: url('../img/background.png') no-repeat center center fixed;
 	-webkit-background-size: contain;
 	-moz-background-size: contain;
 	-o-background-size: contain;
 	background-size: contain;
-	background-color: #66afe2;
+	background-color: #31bdc0;
 	background-attachment: fixed; /* FIXED FOR IE */
 }
 
@@ -213,6 +213,10 @@ h2 {
 	padding: 70px 0px 50px;
 }
 
+#localdepartida {
+	padding: 70px 0px 50px;
+}
+
 #adoteJovem {
 	padding: 70px 0px 50px;
 }
@@ -228,14 +232,14 @@ h2 {
 /* BLOCK CONTACT RIGHT */
 
 #contato .info {
-    background:#ccc; 
+    background:#c0aca0; 
     line-height:25px;
     padding: 5px 10px;
     margin-bottom: 5px;
 }
 
 #contato .info p {
-    color:#6ea2d1;
+    color:#fff;
     padding-left: 18px;
 }
 
@@ -247,12 +251,12 @@ h2 {
 
 p {
 	font-size: 18px;
-	color:#6ea2d1;
+	color:#31bdc0;
 }
 
 ul{
 	font-size: 18px;
-	color:#6ea2d1;
+	color:#31bdc0;
 }
 
 .contactAddress {background: url("../img/icons/icon-address-grey.png") no-repeat scroll left 7px transparent;}
@@ -262,7 +266,7 @@ ul{
 
 footer {
 	padding: 20px 0;
-	background-color: #6ea2d1;
+	background-color: #31bdc0;
 }
 
 footer p.copyright {
@@ -270,7 +274,7 @@ footer p.copyright {
 }
 
 footer a {
-	color: #6ea2d1;
+	color: #31bdc0;
 	text-decoration: none;
 }
 
@@ -483,7 +487,7 @@ textarea.error {
 
 .icon {
 	font-size: 50px;
-	color: #6ea2d1;
+	color: #31bdc0;
 	text-decoration: none;
 	-webkit-transition: all .5s ease-in-out;
 	-moz-transition: all .5s ease-in-out;
