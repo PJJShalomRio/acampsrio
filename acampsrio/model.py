@@ -11,7 +11,6 @@ class Participante(db.Model):
     nome = db.StringProperty()
     dataNascimento = db.StringProperty()
     sexo = db.StringProperty()
-    universitario = db.StringProperty()
     barraca = db.StringProperty()
     identidade = db.StringProperty()
     
@@ -20,6 +19,7 @@ class Participante(db.Model):
     cidade = db.StringProperty()
     uf = db.StringProperty()
     bairro = db.StringProperty()
+    zona = db.StringProperty()
     
     telCelular1 = db.StringProperty()
     telCelular2 = db.StringProperty()
@@ -69,7 +69,7 @@ class Servico(db.Model):
     telCelular2 = db.StringProperty()
     telResidencial = db.StringProperty()
     email = db.StringProperty()
-    
+       
     problemaSaude = db.StringProperty()
     restricaoAtividadeFisica = db.StringProperty()
     temAlgumaAlergia = db.StringProperty()

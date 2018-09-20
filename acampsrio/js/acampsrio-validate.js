@@ -77,6 +77,9 @@ $(document).ready(function() {
 			bairro : {
 				required : true
 			},
+			zona : {
+				required : true
+			},
 			uf : {
 				required : true
 			},

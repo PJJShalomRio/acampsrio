@@ -120,7 +120,14 @@ class InscricaoParticipanteHandler(RequestHandler):
     def get(self):
         self.response.out.write(template.render('pages/inscricaoParticipante.html', {}))
     def post(self):
-        listaFamilia = ['BRANCA', 'VERMELHA', 'AMARELA', 'VERDE', 'AZUL', 'CORAL', 'PRETA', 'ROXA']
+        familiaDict = {
+                       "SUL": "Laranja e Roxo",
+                       "NORTE": "Azul e Verde",
+                       "OESTE": "Preto e Branco",
+                       "CENTRAL": "Laranja e Roxo",
+                       "BAIXADA": "Marrom e vermelho",
+                       "OUTRAS": "Marrom e vermelho"
+                       }
         
         try:
             participante = Participante()
@@ -135,6 +142,7 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.cidade = self.request.get('cidade').strip().upper()
             participante.uf = self.request.get('uf')
             participante.bairro = self.request.get('bairro').strip().upper()
+            participante.zona = self.request.get('zona')
             
             participante.telCelular1 = self.request.get('telCelular1')
             participante.telCelular2 = self.request.get('telCelular2')
@@ -156,7 +164,7 @@ class InscricaoParticipanteHandler(RequestHandler):
 
             participante.pagouInscricao = 'N'
             participante.jaChegou = 'N'
-            participante.familia = listaFamilia[randint(0, 7)]
+            participante.familia = familiaDict[participante.zona]
             
             participanteJaExiste = Participante.all().filter('nome = ', participante.nome).count()
             if participanteJaExiste is None or participanteJaExiste == 0: 
