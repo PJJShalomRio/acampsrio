@@ -40,8 +40,6 @@ class Participante(db.Model):
     ficouSabendo = db.StringListProperty()
     
     familia = db.StringProperty()
-    pagouInscricao = db.StringProperty()
-    jaChegou = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
 
@@ -80,19 +78,14 @@ class Servico(db.Model):
     telCelular2Contato = db.StringProperty()
     telResidencialContato = db.StringProperty()
     telComercialContato = db.StringProperty()
+    linkRedeSocial = db.StringProperty()
     
-    pagouInscricao = db.StringProperty()
-    jaChegou = db.StringProperty()
+    setorParticipa = db.StringProperty()
+    nomeGrupoOracao = db.StringProperty()
+    nomePastor = db.StringProperty()
+    tipoMembro = db.StringProperty()
     
     dataInscricao = db.DateTimeProperty(auto_now=True, auto_now_add=True)
-
-class Familia():
-    cor = str
-    filhos = list()
-
-class Onibus():
-    numero = str
-    pessoas = list()
   
 class Contato(db.Model):
     

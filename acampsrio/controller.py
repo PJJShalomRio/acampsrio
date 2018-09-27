@@ -1,13 +1,14 @@
+import collections
+import csv
 from datetime import date
+
 from google.appengine._internal.django.utils.encoding import smart_str
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import RequestHandler, template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from model import Participante, Servico, Contato, Onibus, Indicacao
-import collections
-import csv
-from random import randint
+
+from model import Participante, Servico, Contato, Indicacao
 
 
 class HomeHandler(RequestHandler):
@@ -91,6 +92,7 @@ class InscricaoServicoHandler(RequestHandler):
             servico.telCelular2 = self.request.get('telCelular2')
             servico.telResidencial = self.request.get('telResidencial')
             servico.email = self.request.get('email')
+            servico.linkRedeSocial = self.request.get('linkRedeSocial')
             
             servico.problemaSaude = self.request.get('problemaSaude')
             servico.restricaoAtividadeFisica = self.request.get('restricaoAtividadeFisica')
@@ -103,8 +105,11 @@ class InscricaoServicoHandler(RequestHandler):
             servico.telResidencialContato = self.request.get('telResidencialContato')
             servico.telComercialContato = self.request.get('telComercialContato')
             
-            servico.pagouInscricao = 'N'
-            servico.jaChegou = 'N'
+            servico.setorParticipa = self.request.get('setorParticipa')
+            servico.nomeGrupoOracao = self.request.get('nomeGrupoOracao')
+            servico.nomePastor = self.request.get('nomePastor')
+            servico.tipoMembro = self.request.get('tipoMembro')
+            
                 
             servicoJaExiste = Servico.all().filter('nome = ', servico.nome).count()
             if servicoJaExiste is None or servicoJaExiste == 0: 
@@ -162,8 +167,6 @@ class InscricaoParticipanteHandler(RequestHandler):
             participante.termoCompromisso = self.request.get('termoCompromisso')
             participante.ficouSabendo = self.request.get_all('ficouSabendo')
 
-            participante.pagouInscricao = 'N'
-            participante.jaChegou = 'N'
             participante.familia = familiaDict[participante.zona]
             
             participanteJaExiste = Participante.all().filter('nome = ', participante.nome).count()
@@ -276,67 +279,6 @@ class RelacaoEstatisticaParticipantesInscritosHandler(RequestHandler):
                                                      }))
         else:
             self.response.out.write(template.render('pages/index.html', {}))
-            
-class RelacaoParticipantesPorFamiliaHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            
-            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA').filter('pagouInscricao = ', 'S')
-            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA').filter('pagouInscricao = ', 'S')
-            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA').filter('pagouInscricao = ', 'S')
-            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE').filter('pagouInscricao = ', 'S')
-            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL').filter('pagouInscricao = ', 'S')
-            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL').filter('pagouInscricao = ', 'S')
-            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA').filter('pagouInscricao = ', 'S')
-            familiaRoxa = Participante.all().order('nome').filter('familia = ', 'ROXA').filter('pagouInscricao = ', 'S')
-            
-            self.response.out.write(template.render('pages/reports/relacaoParticipantesPorFamilia.html',
-                                                    {'familiaBranca':familiaBranca,
-                                                    'familiaVermeha':familiaVermeha,
-                                                    'familiaAmarela':familiaAmarela,
-                                                    'familiaVerde':familiaVerde,
-                                                    'familiaAzul':familiaAzul,
-                                                    'familiaCoral':familiaCoral,
-                                                    'familiaPreta':familiaPreta,
-                                                    'familiaRoxa':familiaRoxa}))
-        else:
-            self.response.out.write(template.render('pages/index.html', {}))
-            
-class RelacaoPessoasPorOnibusHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            listaOnibus = list()
-            listaPassageiro = list()
-            countPassageiro = 0
-            countOnibus = 1
-            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S').filter('jaChegou = ', 'S'):
-                if countPassageiro < 44:
-                    listaPassageiro.append(participante)
-                    countPassageiro += 1
-                else:
-                    onibus = Onibus()
-                    onibus.numero = countOnibus
-                    onibus.pessoas = listaPassageiro
-                    onibus.total = listaPassageiro.__len__()
-                    listaOnibus.append(onibus)
-                    
-                    listaPassageiro = list() 
-                    listaPassageiro.append(participante)
-                    countPassageiro = 1
-                    countOnibus += 1
-                    
-            onibus = Onibus()
-            onibus.numero = countOnibus
-            onibus.pessoas = listaPassageiro
-            onibus.total = listaPassageiro.__len__()
-            listaOnibus.append(onibus)
-            
-            self.response.out.write(template.render('pages/reports/relacaoPessoasPorOnibus.html',
-                                                    {'listaOnibus':listaOnibus}))
-        else:
-            self.response.out.write(template.render('pages/index.html', {}))
 
 class ExportarParticipantesHandler(RequestHandler):
     def get(self):
@@ -345,24 +287,26 @@ class ExportarParticipantesHandler(RequestHandler):
             self.response.headers['Content-Type'] = 'application/csv'
             self.response.headers['Content-Disposition'] = 'attachment; filename=participantes.csv'
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade",
-                             "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
+            writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Identidade", "Familia",
+                             "Logradouro", "Complemento", "Cidade", "UF", "Bairro", "Zona",
                              "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
                              "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
-                             "Familia", "Vai Levar Barraca", "Pagou a Inscricao", "Ja Chegou"])
+                             "Familia", "Vai Levar Barraca"])
             
             for participante in Participante.all().order('nome'):
                 writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
                                  smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
                                  smart_str(participante.sexo, encoding='ISO-8859-1'),
                                  smart_str(participante.identidade, encoding='ISO-8859-1'),
+                                 smart_str(participante.familia, encoding='ISO-8859-1'),
                                  smart_str(participante.logradouro, encoding='ISO-8859-1'),
                                  smart_str(participante.complemento, encoding='ISO-8859-1'),
                                  smart_str(participante.cidade, encoding='ISO-8859-1'),
                                  smart_str(participante.uf, encoding='ISO-8859-1'),
                                  smart_str(participante.bairro, encoding='ISO-8859-1'),
+                                 smart_str(participante.zona, encoding='ISO-8859-1'),
                                  smart_str(participante.telCelular1, encoding='ISO-8859-1'),
                                  smart_str(participante.telCelular2, encoding='ISO-8859-1'),
                                  smart_str(participante.telResidencial, encoding='ISO-8859-1'),
@@ -377,9 +321,7 @@ class ExportarParticipantesHandler(RequestHandler):
                                  smart_str(participante.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.telComercialContato, encoding='ISO-8859-1'),
                                  smart_str(participante.familia, encoding='ISO-8859-1'),
-                                 smart_str(participante.barraca, encoding='ISO-8859-1'),
-                                 smart_str(participante.pagouInscricao, encoding='ISO-8859-1'),
-                                 smart_str(participante.jaChegou, encoding='ISO-8859-1')
+                                 smart_str(participante.barraca, encoding='ISO-8859-1')
                                  ])
         
 class ExportarServicoHandler(RequestHandler):
@@ -391,11 +333,11 @@ class ExportarServicoHandler(RequestHandler):
             writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(["Nome", "Data de Nascimento", "Sexo", "Equipe",
                              "Logradouro", "Complemento", "Cidade", "UF", "Bairro",
-                             "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email",
+                             "Tel Celular1", "Tel Celular2", "Tel Residencial", "Email", "Rede Social",
                              "Problema de Saude", "Restricao Atividade Fisica", "Tem Alguma Alergia", "Toma Algum Medicamento",
                              "Nome do Contato",
                              "Tel Celular1 Contato", "Tel Celular2 Contato", "Tel Residencial Contato", "Tel Comercial Contato",
-                             "Pagou a Inscricao", "Ja Chegou"])
+                             "Setor que Participa", "Nome Grupo de Oracao", "Nome do Pastor", "Tipo de Membro"])
             
             for servico in Servico.all().order('nome'):
                 writer.writerow([smart_str(servico.nome, encoding='ISO-8859-1'),
@@ -411,6 +353,7 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular2, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencial, encoding='ISO-8859-1'),
                                  smart_str(servico.email, encoding='ISO-8859-1'),
+                                 smart_str(servico.linkRedeSocial, encoding='ISO-8859-1'),
                                  smart_str(servico.problemaSaude, encoding='ISO-8859-1'),
                                  smart_str(servico.restricaoAtividadeFisica, encoding='ISO-8859-1'),
                                  smart_str(servico.temAlgumaAlergia, encoding='ISO-8859-1'),
@@ -420,152 +363,11 @@ class ExportarServicoHandler(RequestHandler):
                                  smart_str(servico.telCelular2Contato, encoding='ISO-8859-1'),
                                  smart_str(servico.telResidencialContato, encoding='ISO-8859-1'),
                                  smart_str(servico.telComercialContato, encoding='ISO-8859-1'),
-                                 smart_str(servico.pagouInscricao, encoding='ISO-8859-1'),
-                                 smart_str(servico.jaChegou, encoding='ISO-8859-1')
+                                 smart_str(servico.setorParticipa, encoding='ISO-8859-1'),
+                                 smart_str(servico.nomeGrupoOracao, encoding='ISO-8859-1'),
+                                 smart_str(servico.nomePastor, encoding='ISO-8859-1'),
+                                 smart_str(servico.tipoMembro, encoding='ISO-8859-1')
                                  ])
-                
-class ExportarOnibusHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            self.response.headers['Content-Type'] = 'application/csv'
-            self.response.headers['Content-Disposition'] = 'attachment; filename=onibus.csv'
-            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            
-            listaOnibus = list()
-            listaPassageiro = list()
-            countPassageiro = 0
-            countOnibus = 1
-            for participante in Participante.all().order('nome').filter('pagouInscricao = ', 'S').filter('jaChegou = ', 'S'):
-                if countPassageiro < 44:
-                    listaPassageiro.append(participante)
-                    countPassageiro += 1
-                else:
-                    onibus = Onibus()
-                    onibus.numero = countOnibus
-                    onibus.pessoas = listaPassageiro
-                    onibus.total = listaPassageiro.__len__()
-                    listaOnibus.append(onibus)
-                    
-                    listaPassageiro = list() 
-                    listaPassageiro.append(participante)
-                    countPassageiro = 1
-                    countOnibus += 1
-                    
-            onibus = Onibus()
-            onibus.numero = countOnibus
-            onibus.pessoas = listaPassageiro
-            onibus.total = listaPassageiro.__len__()
-            listaOnibus.append(onibus)
-            
-            for onibus in listaOnibus:
-                writer.writerow([smart_str("Onibus: " + str(onibus.numero), encoding='ISO-8859-1')])
-                writer.writerow([smart_str("Responsavel 1:", encoding='ISO-8859-1')])
-                writer.writerow([smart_str("Responsavel 2:", encoding='ISO-8859-1')])
-                writer.writerow(["Nome", "Data de Nascimento", "Identidade", "Tel Celular1"])
-                for pessoa in onibus.pessoas:
-                    writer.writerow([smart_str(pessoa.nome, encoding='ISO-8859-1'),
-                                     smart_str(pessoa.dataNascimento, encoding='ISO-8859-1'),
-                                     smart_str(pessoa.identidade, encoding='ISO-8859-1'),
-                                     smart_str(pessoa.telCelular1, encoding='ISO-8859-1')
-                                     ])
-                writer.writerow([""])
-
-class ExportarFamiliaHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            self.response.headers['Content-Type'] = 'application/csv'
-            self.response.headers['Content-Disposition'] = 'attachment; filename=familias.csv'
-            writer = csv.writer(self.response.out, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-            
-            familiaBranca = Participante.all().order('nome').filter('familia = ', 'BRANCA').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia BRANCA", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaBranca:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaVermeha = Participante.all().order('nome').filter('familia = ', 'VERMELHA').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia VERMELHA", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaVermeha:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaAmarela = Participante.all().order('nome').filter('familia = ', 'AMARELA').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia AMARELA", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaAmarela:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaVerde = Participante.all().order('nome').filter('familia = ', 'VERDE').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia VERDE", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaVerde:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaAzul = Participante.all().order('nome').filter('familia = ', 'AZUL').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia AZUL", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaAzul:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaCoral = Participante.all().order('nome').filter('familia = ', 'CORAL').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia CORAL", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaCoral:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaPreta = Participante.all().order('nome').filter('familia = ', 'PRETA').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia PRETA", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaPreta:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
-            
-            familiaRoxa = Participante.all().order('nome').filter('familia = ', 'ROXA').filter('pagouInscricao = ', 'S')
-            writer.writerow([smart_str("Familia ROXA", encoding='ISO-8859-1')])
-            writer.writerow(["Nome", "Data de Nascimento", "Cidade", "Bairro"])
-            for participante in familiaRoxa:
-                writer.writerow([smart_str(participante.nome, encoding='ISO-8859-1'),
-                                 smart_str(participante.dataNascimento, encoding='ISO-8859-1'),
-                                 smart_str(participante.cidade, encoding='ISO-8859-1'),
-                                 smart_str(participante.bairro, encoding='ISO-8859-1')
-                                 ])
-            writer.writerow([""])
 
 class RelacaoIndicaoesHandler(RequestHandler):
     def get(self):
@@ -594,32 +396,6 @@ class ExportarIndicaoesHandler(RequestHandler):
                                  smart_str(indicacao.nome, encoding='ISO-8859-1')
                                  ])
 
-class AtualizarHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            for participante in Participante.all():
-                participante.jaChegou = 'N'
-                participante.put()
-            
-            for servico in Servico.all():
-                servico.jaChegou = 'N'
-                servico.put()
-                
-        self.response.out.write(template.render('pages/index.html', {}))
-
-class SortearFamiliasHandler(RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user and users.is_current_user_admin():
-            
-            listaFamilia = ['BRANCA', 'VERMELHA', 'AMARELA', 'VERDE', 'AZUL', 'CORAL', 'PRETA', 'ROXA']
-
-            for participante in Participante.all():
-                participante.familia = listaFamilia[randint(0, 7)]
-                participante.put()
-
-        self.response.out.write(template.render('pages/index.html', {}))
 
 application = webapp.WSGIApplication(
                                      [('/', HomeHandler),
@@ -631,15 +407,11 @@ application = webapp.WSGIApplication(
                                       ('/contato', ContatoHandler),
                                       ('/exportarParticipante', ExportarParticipantesHandler),
                                       ('/exportarServico', ExportarServicoHandler),
-                                      ('/exportarOnibus', ExportarOnibusHandler),
-                                      ('/exportarFamilia', ExportarFamiliaHandler),
                                       ('/realizarPagamento', RealizarPagamentoHandler),
                                       ('/realizarPagamentoServico', RealizarPagamentoServicoHandler),
                                       ('/relacaoParticipantesInscritos', RelacaoParticipantesInscritosHandler),
                                       ('/relacaoServicosInscritos', RelacaoServicosInscritosHandler),
                                       ('/relacaoEstatisticaParticipantesInscritos', RelacaoEstatisticaParticipantesInscritosHandler),
-                                      ('/relacaoPessoasPorOnibus', RelacaoPessoasPorOnibusHandler),
-                                      ('/relacaoParticipantesPorFamilia', RelacaoParticipantesPorFamiliaHandler),
                                       ('/relacaoIndicoes', RelacaoIndicaoesHandler),
                                       ('/exportarIndicacoes', ExportarIndicaoesHandler)
                                      ])
