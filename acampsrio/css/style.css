@@ -62,7 +62,7 @@ strong {
 }
 
 .subtittle a:hover {
-	color: #31bdc0;
+	color: #ff4336;
 }
 
 h2 {
@@ -70,7 +70,7 @@ h2 {
 	font-weight: 300;
 	font-size: 52px;
 	padding: 20px 20px 20px 20px;
-	background-color: #c0aca0;
+	background-color: #ff4336;
 }
 
 .breaker {
@@ -123,7 +123,7 @@ h2 {
 .navbar {
 	margin-bottom: 0;
 	z-index: 42;
-	background: #31bdc0;
+	background: #ff4336;
 	height: 65px;
 	padding-right: 20px;
 }
@@ -166,7 +166,7 @@ h2 {
 
 .navbar-inner {
 	background-image: none;
-	background: #31bdc0;
+	background: #ff4336;
 	box-shadow: none;
 	border: none;
 }
@@ -185,7 +185,7 @@ h2 {
 	-moz-background-size: contain;
 	-o-background-size: contain;
 	background-size: contain;
-	background-color: #31bdc0;
+	background-color: #ff4336;
 	background-attachment: fixed; /* FIXED FOR IE */
 }
 
@@ -232,7 +232,7 @@ h2 {
 /* BLOCK CONTACT RIGHT */
 
 #contato .info {
-    background:#c0aca0; 
+    background:#ff4336; 
     line-height:25px;
     padding: 5px 10px;
     margin-bottom: 5px;
@@ -251,12 +251,12 @@ h2 {
 
 p {
 	font-size: 18px;
-	color:#31bdc0;
+	color:#ff4336;
 }
 
 ul{
 	font-size: 18px;
-	color:#31bdc0;
+	color:#ff4336;
 }
 
 .contactAddress {background: url("../img/icons/icon-address-grey.png") no-repeat scroll left 7px transparent;}
@@ -266,7 +266,7 @@ ul{
 
 footer {
 	padding: 20px 0;
-	background-color: #31bdc0;
+	background-color: #ff4336;
 }
 
 footer p.copyright {
@@ -274,7 +274,7 @@ footer p.copyright {
 }
 
 footer a {
-	color: #31bdc0;
+	color: #ff4336;
 	text-decoration: none;
 }
 
@@ -487,7 +487,7 @@ textarea.error {
 
 .icon {
 	font-size: 50px;
-	color: #31bdc0;
+	color: #ff4336;
 	text-decoration: none;
 	-webkit-transition: all .5s ease-in-out;
 	-moz-transition: all .5s ease-in-out;
